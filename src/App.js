@@ -1,18 +1,13 @@
-import Component from 'react'
+import {Component} from 'react'
 
 import {Switch, Route, Redirect} from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
+
 import Login from './components/Login'
 import Home from './components/Home'
 import Trending from './components/Trending'
 
-import SavedVideos from './components/SavedVideos'
-
 import Gaming from './components/Gaming'
-
-import TrendingItemDetails from './components/TrendingItemDetails'
-import GamingItemDetails from './components/GamingItemDetails'
-
 import VideoItemDetails from './components/VideoItemDetails'
 
 import NotFound from './components/NotFound'
@@ -46,6 +41,7 @@ class App extends Component {
 
   render() {
     const {isDarkTheme, isLiked, savedVideosList} = this.state
+
     return (
       <ThemeContext.Provider
         value={{
@@ -63,22 +59,12 @@ class App extends Component {
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/trending" component={Trending} />
           <ProtectedRoute exact path="/gaming" component={Gaming} />
-          <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
           <ProtectedRoute
             exact
             path="/videos/:id"
             component={VideoItemDetails}
           />
-          <ProtectedRoute
-            exact
-            path="/trending/:id"
-            component={TrendingItemDetails}
-          />
-          <ProtectedRoute
-            exact
-            path="/gaming/:id"
-            component={GamingItemDetails}
-          />
+
           <Route path="/not-found" component={NotFound} />
           <Redirect to="not-found" />
         </Switch>

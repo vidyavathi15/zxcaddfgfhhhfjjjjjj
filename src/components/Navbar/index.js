@@ -1,5 +1,5 @@
 import Popup from 'reactjs-popup'
-import {Link, withRouter} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 import ThemeContext from '../../context/ThemeContext'
 import './index.css'
@@ -90,4 +90,4 @@ const Navbar = () => (
   </ThemeContext.Consumer>
 )
 
-export default withRouter(Navbar)
+export default Navbar

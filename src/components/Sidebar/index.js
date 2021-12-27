@@ -13,57 +13,47 @@ import {
   IconContainer,
   IconImage,
   FooterText,
+  ChangeButton,
 } from './styledComponents'
 
 const Sidebar = props => {
-  const {changeColorOfText,colorChangeText} = props
-}
+  const {changeColorOfText} = props
 
-const onClickChangeColorIconOrText = () => {
-
-        changeColorOfText()
-}
-const colorTurnsToRed = colorChangeText ?   #ff0b37    :   #909090   
-
+  const onClickChangeColorIconOrText = () => {
+    changeColorOfText()
+  }
 
   return (
     <SidebarContainer>
       <SidebarTopContainer>
-      <ChangeButton type="button" onClick = {onClickChangeColorIconOrText}>
-
-         <HomeContainer >
-          <AiOutlineHome color={colorTurnsToRed} />
-          <LinkItem to="/">Home</LinkItem>
-        </HomeContainer>
+        <ChangeButton type="button" onClick={onClickChangeColorIconOrText}>
+          <HomeContainer>
+            <AiOutlineHome color="" />
+            <LinkItem to="/">Home</LinkItem>
+          </HomeContainer>
         </ChangeButton>
-        
-        <ChangeButton type="button" onClick = {onClickChangeColorIconOrText}>
 
-        <HomeContainer>
-          <FaFirefoxBrowser color={colorTurnsToRed}/>
-          <LinkItem to="/trending">Trending</LinkItem>
-        </HomeContainer>
-          </ChangeButton>
+        <ChangeButton type="button" onClick={onClickChangeColorIconOrText}>
+          <HomeContainer>
+            <FaFirefoxBrowser color="" />
+            <LinkItem to="/trending">Trending</LinkItem>
+          </HomeContainer>
+        </ChangeButton>
+        <ChangeButton type="button" onClick={onClickChangeColorIconOrText}>
+          <HomeContainer>
+            <SiYoutubegaming color="" />
+            <LinkItem to="/gaming">Gaming</LinkItem>
+          </HomeContainer>
+        </ChangeButton>
 
-
-
-       <ChangeButton type="button" onClick = {onClickChangeColorIconOrText}>
-
-        <HomeContainer>
-          <SiYoutubegaming color={colorTurnsToRed}/>
-          <LinkItem to="/gaming">Gaming</LinkItem>
-        </HomeContainer>
-         </ChangeButton>
-
-         <ChangeButton type="button" onClick = {onClickChangeColorIconOrText}>
-            <HomeContainer>
-            <BiListPlus color={colorTurnsToRed}/>
+        <ChangeButton type="button" onClick={onClickChangeColorIconOrText}>
+          <HomeContainer>
+            <BiListPlus color="" />
             <LinkItem to="/saved-videos">Saved videos</LinkItem>
-            </HomeContainer>
-         </ChangeButton>
+          </HomeContainer>
+        </ChangeButton>
       </SidebarTopContainer>
 
-      
       <SidebarBottomContainer>
         <FooterHeading>CONTACT US</FooterHeading>
         <IconContainer>

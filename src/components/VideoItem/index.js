@@ -1,4 +1,4 @@
-import {formDistanceToNow} from 'date-fns'
+import {formatDistanceToNow} from 'date-fns'
 import {Link} from 'react-router-dom'
 
 import {
@@ -18,7 +18,7 @@ const VideoItem = props => {
   const {title, id, thumbnailUrl, viewCount, publishedAt} = allVideos
   const {name, profileImageUrl} = channel
 
-  const postedDate = formDistanceToNow(new Date(publishedAt))
+  const postedDate = formatDistanceToNow(new Date(publishedAt))
 
   return (
     <Link to={`/videos/${id}`}>

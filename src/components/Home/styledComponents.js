@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 
 export const BannerContainer = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
@@ -13,6 +13,7 @@ export const AppContainer = styled.div`
   display: flex;
   min-height: 100vh;
   margin-top: 20px;
+  background-color: #00306e;
 `
 export const AllVideosContainer = styled.div`
   display: flex;
@@ -82,11 +83,53 @@ export const NoSearchResultStatus = styled.p`
 `
 export const NoSearchRetryButton = styled.button`
   cursor: pointer;
-
   outline: none;
   padding: 5px;
   background-color: #4f46e5;
   height: 30px;
   width: 130px;
   border-radius: 6px;
+`
+export const FailureVideosContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+export const VideoFailureImage = styled.img`
+  height: 150px;
+  width: 150px;
+`
+export const FailureResults = styled.p`
+  color: #ffffff;
+  font-size: 16px;
+  font-family: 'Roboto';
+  font-weight: 800;
+`
+export const FailureResultsStatus = styled.p`
+  color: #ffffff;
+  font-size: 13px;
+  font-family: 'Roboto';
+  font-weight: 800;
+`
+export const FailureVideosRetryButton = styled.button`
+  outline: none;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 15px;
+  font-size: 13px;
+  font-family: 'Roboto';
+  font-weight: 800;
+  color: black;
+`
+export const LoaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+export const SuccessViewListContainer = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0px;
+  margin: 0px;
 `

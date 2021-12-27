@@ -12,7 +12,7 @@ const GameItem = props => {
   const {id, title, viewCount, thumbnailUrl} = gameItemDetails
 
   return (
-    <Link to={`/gaming/${id}`}>
+    <Link to={`/videos/${id}`}>
       <GameListItem>
         <ThumbnailImage src={thumbnailUrl} alt="thumbnail" />
         <GameItemTitle>{title}</GameItemTitle>

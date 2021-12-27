@@ -1,6 +1,6 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 
-export const SavedPostedDate = styled.li`
+export const SavedVideosListItem = styled.li`
   list-style-type: none;
   display: flex;
   align-items: center;
@@ -10,7 +10,7 @@ export const SavedPostedDate = styled.li`
     width: 100%;
   }
 `
-export const SavedThumbnailImag = styled.img`
+export const SavedVideosThumbnailImage = styled.img`
   height: 50px;
   width: 140px;
   margin-right: 20px;
@@ -38,8 +38,7 @@ export const SavedViewCount = styled.p`
   font-family: 'Roboto';
   font-weight: 800;
 `
-
-export const SavedPostedDate = styled.span`
+export const SavedVideoPostedDate = styled.span`
   color: #ffffff;
   font-size: 13px;
   font-family: 'Roboto';

@@ -1,101 +1,101 @@
-import Component from 'react'
-import Cookies from "js-cookie"
-import ThemContext from "./components/ThemeContext"
-
-
+import {Component} from 'react'
+import Cookies from 'js-cookie'
+import Loader from 'react-loader-spinner'
+import ThemeContext from '../../context/ThemeContext'
+import TrendingItem from '../TrendingItem'
 import {
+  TrendingBgContainer,
+  LoaderContainer,
+  FailureTrendingContainer,
+  TrendingFailureImage,
+  TrendingFailureResults,
+  TrendingFailureResultsStatus,
+  FailureTrendingRetryButton,
+  TrendingListContainer,
+} from './styledComponents'
 
-
-
-
-} from "./styledComponents"
-
-const apiStatusConstants= {
-    initial:"INITIAL",
-    success:"SUCCESS",
-    failure:"FAILURE",
-    inProgress: "IN_PROGRESS",
+const apiStatusConstants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
 }
 
-class Trending extends Component{
-   state={trendingVideos: [],trendingChannel: {} }
+class Trending extends Component {
+  state = {trendingVideos: [], trendingChannel: {}}
 
-componentDidMount(){
+  componentDidMount() {
     this.getTrendingData()
-}
+  }
 
-
-
-getFormattedData = data=> {
+  getFormattedData = data => ({
     id: data.id,
     title: data.title,
-    viewCount:data.view_count,
+    viewCount: data.view_count,
     thumbnailUrl: data.thumbnail_url,
     publishedAt: data.published_at,
-}
+  })
 
+  getTrendingData = async () => {
+    this.setState({apiStatus: apiStatusConstants.inProgress})
 
+    const jwtToken = Cookies.get('jwtToken')
 
-getTrendingData = async () =>{
-    this.setState({apiStatus:apiStatusConstants.inProgress})
-    
-    const jwtToken = Cookies.get("jwtToken")
+    const url = 'https://apis.ccbp.in/videos/trending'
 
-    const url="https://apis.ccbp.in/videos/trending"
-    
-    const options={
-        headers:{
-            Authorization:`Bearer ${jwtToken}`
-        },
-        method:"GET",
+    const options = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      method: 'GET',
     }
-
-
 
     const response = await fetch(url, options)
 
-    if (response.ok){
-        const fetchedData= await response.json()
+    if (response.ok) {
+      const fetchedData = await response.json()
 
-        const updatedData= {
-            trendingUpdatedData: fetchedData.videos.map(each=> this.getFormattedData(each)),
-            trendingFetchedChannel: {
-                name: fetchedData.videos.channel.name,
-                profileImageUrl: fetchedData.videos.channel.profile_image_url,
-          }
+      const updatedData = {
+        trendingUpdatedData: fetchedData.videos.map(each =>
+          this.getFormattedData(each),
+        ),
+        trendingFetchedChannel: {
+          name: fetchedData.videos.channel.name,
+          profileImageUrl: fetchedData.videos.channel.profile_image_url,
+        },
+      }
 
-
-         this.setState({trendingChannel: updatedData.trendingFetchedChannel, 
-               trendingVideos: updatedData.trendingUpdatedData,
-              apiStatus:apiStatusConstants.success})
+      this.setState({
+        trendingChannel: updatedData.trendingFetchedChannel,
+        trendingVideos: updatedData.trendingUpdatedData,
+        apiStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
-    else{
-        this.setState({apiStatus:apiStatusConstants.failure})
+  }
 
-    }
-}
-
-
-renderTrendingSuccessView = () => {
-  const {trendingVideos, trendingChannel} = this.state
-    return(
-
-        <TrendingListContainer>
-        {trendingVideos.map(each => (<TrendingItem key ={each.id} trendingDetails={each} trendingChannel={trendingChannel}/>))}
-        </TrendingListContainer>
+  renderTrendingSuccessView = () => {
+    const {trendingVideos, trendingChannel} = this.state
+    console.log(trendingVideos)
+    return (
+      <TrendingListContainer>
+        {trendingVideos.map(each => (
+          <TrendingItem
+            key={each.id}
+            trendingDetails={each}
+            trendingChannel={trendingChannel}
+          />
+        ))}
+      </TrendingListContainer>
     )
-}
+  }
 
-
-
-
-onClickRetry = () => {
+  onClickRetry = () => {
     this.getGamingData()
-} 
+  }
 
-
-
-renderTrendingFailureView = () =>(
+  renderTrendingFailureView = () => (
     <ThemeContext.Consumer>
       {value => {
         const {isDarkTheme} = value
@@ -107,7 +107,9 @@ renderTrendingFailureView = () =>(
         return (
           <FailureTrendingContainer>
             <TrendingFailureImage src={failureThemeUrl} alt="failure view" />
-            <TrendingFailureResults>Oops! Something Went Wrong</TrendingFailureResults>
+            <TrendingFailureResults>
+              Oops! Something Went Wrong
+            </TrendingFailureResults>
             <TrendingFailureResultsStatus>
               We are having Some trouble to complete your request, please try
               again.
@@ -119,68 +121,36 @@ renderTrendingFailureView = () =>(
         )
       }}
     </ThemeContext.Consumer>
+  )
 
-)
-
-
-
-renderLoadingView = () => (
+  renderLoadingView = () => (
     <LoaderContainer data-testid="loader">
       <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
     </LoaderContainer>
+  )
 
+  renderTrending = () => {
+    const {apiStatus} = this.state
 
-)
-
-
-
-
-
-
-
-
-
-
-renderTrending= () => {
-    const {apiStatus}= this.state 
-
-    switch(apiStatus){
-        case apiStatusConstants.success:
-            return this.renderTrendingSuccessView()
-        case apiStatusConstants.failure:
-            return this.renderTrendingFailureView()
-        case apiStatusConstants.inProgress:
-            return this.renderLoadingView()
-            default:
-                return null
-
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.renderTrendingSuccessView()
+      case apiStatusConstants.failure:
+        return this.renderTrendingFailureView()
+      case apiStatusConstants.inProgress:
+        return this.renderLoadingView()
+      default:
+        return null
     }
-}
+  }
 
-
-
-render(){
-    return(
-        <ThemContext.Consumer>
-        {value=> {
-            const {isDarkTheme} = value 
-            const TrendingBgColorTheme = isDarkTheme ? #0f0f0f: #f9f9f9
-
-
-            return(
-            <TrendingBgContainer data-testid="trending" TrendingBgColorTheme= {TrendingBgColorTheme}>
-            {this.renderTrending()}
-
-            </TrendingBgContainer>
-            )
-        }}
-
-        </ThemContext.Consumer>
-        )
-
-    
-     
-    }
+  render() {
+    return (
+      <TrendingBgContainer data-testid="trending">
+        {this.renderTrending()}
+      </TrendingBgContainer>
+    )
+  }
 }
 
 export default Trending

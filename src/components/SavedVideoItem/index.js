@@ -1,33 +1,34 @@
+import {formatDistanceToNow} from 'date-fns'
 import {Link} from 'react-router-dom'
-import formDistanceToNow from 'date-fns'
 import {
-  SavedVideoListItem,
-  SavedThumbnailImage,
   SavedInformationContainer,
   SavedTitle,
   SavedName,
   SavedViewCount,
-  SavedPostedDate,
+  SavedVideoPostedDate,
+  SavedVideosListItem,
+  SavedVideosThumbnailImage,
 } from './styledComponents'
 
 const SavedVideoItem = props => {
   const {id, title, thumbnailUrl, viewCount, publishedAt, name} = props
 
-  const postedDate = formDistanceToNow(new Date(publishedAt))
+  const postedDate = formatDistanceToNow(new Date(publishedAt))
 
   return (
     <Link to={`/saved-videos/${id}`}>
-      <SavedVideoListItem>
-        <SavedThumbnailImage src={thumbnailUrl} alt={name} />
+      <SavedVideosListItem>
+        <SavedVideosThumbnailImage src={thumbnailUrl} alt={name} />
 
         <SavedInformationContainer>
           <SavedTitle>{title}</SavedTitle>
           <SavedName>{name}</SavedName>
           <SavedViewCount>
-            {viewCount} Views <SavedPostedDate> . {postedDate}</SavedPostedDate>
+            {viewCount} Views
+            <SavedVideoPostedDate> . {postedDate}</SavedVideoPostedDate>
           </SavedViewCount>
         </SavedInformationContainer>
-      </SavedVideoListItem>
+      </SavedVideosListItem>
     </Link>
   )
 }

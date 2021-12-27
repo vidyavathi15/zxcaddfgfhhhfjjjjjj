@@ -18,7 +18,7 @@ const TrendingItem = props => {
   const postedDate = formatDistanceToNow(new Date(publishedAt))
 
   return (
-    <Link to={`/trending/${id}`}>
+    <Link to={`/videos/${id}`}>
       <TrendingListItem>
         <ThumbnailImage src={thumbnailUrl} alt="thumbnail" />
         <TrendingInformationContainer>

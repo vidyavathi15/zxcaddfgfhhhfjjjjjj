@@ -45,3 +45,9 @@ export const FailureTrendingRetryButton = styled.button`
   font-family: 'Roboto';
   font-weight: 800;
 `
+export const LoaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`

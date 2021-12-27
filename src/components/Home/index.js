@@ -1,11 +1,12 @@
-import Component from 'react'
+import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import {MdOutlineSearch} from 'react-icons'
+import {BsSearch} from 'react-icons/bs'
 import Navbar from '../Navbar'
 import VideoItem from '../VideoItem'
 
 import ThemeContext from '../../context/ThemeContext'
+
 import {
   FailureVideosContainer,
   VideoFailureImage,
@@ -14,7 +15,6 @@ import {
   FailureVideosRetryButton,
   LoaderContainer,
   AppContainer,
-  Sidebar,
   AllVideosContainer,
   BannerContainer,
   BannerText,
@@ -23,6 +23,11 @@ import {
   BannerButton,
   SearchButton,
   SuccessViewListContainer,
+  NoSearchedVideosContainer,
+  NoSearchedImage,
+  NoSearchResults,
+  NoSearchResultStatus,
+  NoSearchRetryButton,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -38,7 +43,6 @@ class Home extends Component {
     allVideos: [],
     channel: {},
     searchInput: '',
-    colorChangeText: false,
   }
 
   componentDidMount() {
@@ -99,32 +103,16 @@ class Home extends Component {
     }
   }
 
-onClickRetry= () => {
+  onClickRetry = () => {
     this.getAllVideosData()
-}
-
-
-
-
-
-
+  }
 
   renderSuccessView = () => {
     const {allVideos, channel} = this.state
-    const showNoSearchVideos = allVideos.length === 0
-    return (
-        {showNoSearchVideos ? (
-            
-            <NoSearchedVideosContainer>
-            <NoSearchedImage src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png" alt ="no videos"/>
-            <NoSearchResults>No Search results found</NoSearchResults>
-            <NoSearchResultStatus>Try different key words or remove search filter</NoSearchResultStatus>
-            <NoSearchRetryButton type="button" onClick= {this.onClickRetry}>Retry</NoSearchRetryButton>
-            </NoSearchedVideosContainer>
-
-
-         ) : (
-            <SuccessViewListContainer>
+    console.log(allVideos)
+    const showNoSearchVideos = allVideos.length > 0
+    return showNoSearchVideos ? (
+      <SuccessViewListContainer>
         {allVideos.map(each => (
           <VideoItem
             key={each.id}
@@ -134,8 +122,21 @@ onClickRetry= () => {
           />
         ))}
       </SuccessViewListContainer>
-    
-    })
+    ) : (
+      <NoSearchedVideosContainer>
+        <NoSearchedImage
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+          alt="no videos"
+        />
+        <NoSearchResults>No Search results found</NoSearchResults>
+        <NoSearchResultStatus>
+          Try different key words or remove search filter
+        </NoSearchResultStatus>
+        <NoSearchRetryButton type="button" onClick={this.onClickRetry}>
+          Retry
+        </NoSearchRetryButton>
+      </NoSearchedVideosContainer>
+    )
   }
 
   renderFailureView = () => (
@@ -185,46 +186,38 @@ onClickRetry= () => {
     }
   }
 
-  changeColorOfText = () => {
-    this.setState({colorChangeText: true})
-  }
+  changeColorOfText = () => {}
 
   render() {
-    const {colorChangeText} = this.state
     return (
-      <>
+      <AppContainer data-testid="home">
         <Navbar />
-        <AppContainer data-testid="home">
-          <Sidebar
-            changeColorOfText={this.changeColorOfText}
-            colorChangeText={colorChangeText}
-          />
-          <AllVideosContainer>
-            <BannerContainer>
-              <ImageLogo
-                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                alt="website logo"
-              />
-              <BannerText>
-                Buy Nxt Watch Premium prepaid plans with UPI
-              </BannerText>
-              <BannerButton type="button">GET IT NOW</BannerButton>
-            </BannerContainer>
 
-            <SearchInput
-              value={SearchInput}
-              onChange={this.onChangeSearchInput}
-              placeholder="search"
-              type="text"
+        <AllVideosContainer>
+          <BannerContainer>
+            <ImageLogo
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+              alt="website logo"
             />
-            <SearchButton type="button" data-testid="searchButton">
-              <MdOutlineSearch size="20px" />
-            </SearchButton>
+            <BannerText>
+              Buy Nxt Watch Premium prepaid plans with UPI
+            </BannerText>
+            <BannerButton type="button">GET IT NOW</BannerButton>
+          </BannerContainer>
 
-            {this.renderAllVideos()}
-          </AllVideosContainer>
-        </AppContainer>
-      </>
+          <SearchInput
+            value={SearchInput}
+            onChange={this.onChangeSearchInput}
+            placeholder="search"
+            type="text"
+          />
+          <SearchButton type="button" data-testid="searchButton">
+            <BsSearch size="20px" />
+          </SearchButton>
+
+          {this.renderAllVideos()}
+        </AllVideosContainer>
+      </AppContainer>
     )
   }
 }

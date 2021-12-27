@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 
 export const SidebarContainer = styled.div`
   display: flex;
@@ -52,4 +52,10 @@ export const FooterText = styled.p`
   font-family: 'Roboto';
   color: #ffffff;
   font-weight: 800;
+`
+export const ChangeButton = styled.button`
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
 `
