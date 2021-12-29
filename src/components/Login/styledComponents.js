@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 export const LoginFormContainer = styled.div`
   display: flex;
@@ -15,10 +15,21 @@ export const WebsiteLogoMobileImage = styled.img`
   }
 `
 export const FormContainer = styled.div`
-  margin-top: 20px;
-  padding: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 350px;
+  margin-top: 10px;
+  @media screen and (min-width: 992px) {
+    width: 350px;
+    flex-shrink: 0;
+    box-shadow: 0px 8px 40px rgba(7, 7, 7, 0.08);
+    padding: 64px 48px 64px 48px;
+    margin-top: 30px;
+  }
 `
 
 export const WebsiteLogoDesktopImage = styled.img`
@@ -32,35 +43,41 @@ export const WebsiteLogoDesktopImage = styled.img`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  margin-top: 20px;
+  width: 100%;
 `
 export const CheckboxContainer = styled.div`
   display: flex;
   padding: 10px;
+  align-items: center;
+  width: 100%;
 `
 export const CheckInput = styled.input`
   height: 20px;
   width: 20px;
+  outline: none;
 `
 export const LabelForCheckbox = styled.label`
   color: #1e293b;
   font-size: 14px;
   font-weight: 800;
   font-family: 'Roboto';
+  padding-left: 10px;
 `
 export const LoginButton = styled.button`
   color: #ffffffff;
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
-
   border: none;
+
   outline: none;
   cursor: pointer;
   border-radius: 6px;
   width: 100%;
   padding: 10px;
   text-align: center;
+  background-color: blue;
 `
 
 export const errorElement = styled.p`
@@ -76,12 +93,17 @@ export const InputLabel = styled.label`
   font-weight: 800;
 `
 export const FormInput = styled.input`
-  line-height: 40px;
-  padding: 15px;
-  border: 1px solid #000000;
-  outline: none;
   font-size: 14px;
-  font-family: 'Roboto';
-  font-weight: 800;
-  color: #7e858e;
+  height: 40px;
+  border: 1px solid #d7dfe9;
+
+  color: #64748b;
+  border-radius: 2px;
+  margin-top: 5px;
+  padding: 8px 16px 8px 16px;
+  outline: none;
+  background-color: transparent;
+
+  width: 100%;
+  outline: none;
 `

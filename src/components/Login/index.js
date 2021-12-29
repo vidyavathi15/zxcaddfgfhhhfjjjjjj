@@ -1,7 +1,7 @@
 import {Component} from 'react'
+import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
 
-import Cookies from 'js-cookie'
 import {
   LoginFormContainer,
   WebsiteLogoMobileImage,
@@ -26,18 +26,19 @@ class Login extends Component {
   }
 
   togglePassword = () => {
-    this.setState({showPassword: true})
+    this.setState(prevState => ({showPassword: !prevState.showPassword}))
   }
 
-  onChangePassword = () => {
+  onClickShowPassword = () => {
     this.togglePassword()
   }
 
   onSubmitSuccess = jwtToken => {
     const {history} = this.props
 
-    Cookies.set('jwtToken', jwtToken, {expires: 30, path: '/'})
-
+    Cookies.set('jwt_token', jwtToken, {
+      expires: 30,
+    })
     history.replace('/')
   }
 
@@ -45,11 +46,13 @@ class Login extends Component {
     this.setState({showSubmitError: true, errorMsg})
   }
 
-  onSubmitForm = async event => {
+  submitForm = async event => {
     event.preventDefault()
+
     const {username, password} = this.state
 
     const userDetails = {username, password}
+
     const url = 'https://apis.ccbp.in/login'
 
     const options = {
@@ -74,6 +77,7 @@ class Login extends Component {
 
   renderUserName = () => {
     const {username} = this.state
+
     return (
       <>
         <InputLabel htmlFor="username">USERNAME</InputLabel>
@@ -122,18 +126,22 @@ class Login extends Component {
 
   render() {
     const {showSubmitError, errorMsg} = this.state
+    console.log(errorMsg)
+    console.log(showSubmitError)
 
     const jwtToken = Cookies.get('jwtToken')
-    if (jwtToken === undefined) {
+
+    if (jwtToken !== undefined) {
       return <Redirect to="/" />
     }
+
     return (
       <LoginFormContainer>
         <WebsiteLogoMobileImage
           src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
           alt="nxt watch logo"
         />
-        <FormContainer onSubmit={this.onSubmitForm}>
+        <FormContainer onSubmit={this.submitForm}>
           <WebsiteLogoDesktopImage
             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
             alt="nxt watch logo"
@@ -151,7 +159,7 @@ class Login extends Component {
               Show Password
             </LabelForCheckbox>
           </CheckboxContainer>
-          <LoginButton type="button">Login</LoginButton>
+          <LoginButton type="submit">Login</LoginButton>
           {showSubmitError && <errorElement>*{errorMsg}</errorElement>}
         </FormContainer>
       </LoginFormContainer>

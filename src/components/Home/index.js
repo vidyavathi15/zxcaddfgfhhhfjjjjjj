@@ -190,34 +190,35 @@ class Home extends Component {
 
   render() {
     return (
-      <AppContainer data-testid="home">
+      <>
         <Navbar />
+        <AppContainer data-testid="home">
+          <AllVideosContainer>
+            <BannerContainer>
+              <ImageLogo
+                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+                alt="website logo"
+              />
+              <BannerText>
+                Buy Nxt Watch Premium prepaid plans with UPI
+              </BannerText>
+              <BannerButton type="button">GET IT NOW</BannerButton>
+            </BannerContainer>
 
-        <AllVideosContainer>
-          <BannerContainer>
-            <ImageLogo
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-              alt="website logo"
+            <SearchInput
+              value={SearchInput}
+              onChange={this.onChangeSearchInput}
+              placeholder="search"
+              type="text"
             />
-            <BannerText>
-              Buy Nxt Watch Premium prepaid plans with UPI
-            </BannerText>
-            <BannerButton type="button">GET IT NOW</BannerButton>
-          </BannerContainer>
+            <SearchButton type="button" data-testid="searchButton">
+              <BsSearch size="20px" />
+            </SearchButton>
 
-          <SearchInput
-            value={SearchInput}
-            onChange={this.onChangeSearchInput}
-            placeholder="search"
-            type="text"
-          />
-          <SearchButton type="button" data-testid="searchButton">
-            <BsSearch size="20px" />
-          </SearchButton>
-
-          {this.renderAllVideos()}
-        </AllVideosContainer>
-      </AppContainer>
+            {this.renderAllVideos()}
+          </AllVideosContainer>
+        </AppContainer>
+      </>
     )
   }
 }

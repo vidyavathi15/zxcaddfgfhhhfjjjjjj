@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 export const BannerContainer = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
@@ -19,6 +19,8 @@ export const AllVideosContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  justify-content: center;
+  align-items: center;
 `
 export const ImageLogo = styled.img`
   height: 25px;
