@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import {Link} from 'react-router-dom'
 
 export const SidebarContainer = styled.div`
   display: flex;
@@ -20,7 +21,7 @@ export const HomeContainer = styled.div`
   display: flex;
   align-items: center;
 `
-export const LinkItem = styled.Link`
+export const LinkItem = styled(Link)`
   text-decoration: none;
   font-size: 20px;
   font-family: 'Roboto';

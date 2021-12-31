@@ -6,15 +6,25 @@ export const BannerContainer = styled.div`
   background-color: #cbd5e1;
   padding: 20px;
   display: flex;
+  height: 150px;
+  width: 100%;
   flex-direction: column;
   border-radius: 6px;
+  @media screen and (min-width: 768px) {
+    height: 50%;
+    width: 50%;
+  }
 `
 export const AppContainer = styled.div`
-  display: flex;
   min-height: 100vh;
-  margin-top: 20px;
   background-color: #00306e;
+  box-shadow: 0px 0px 0px 1px #dcdcdc;
 `
+
+export const SideAndVideosContainer = styled.div`
+  display: flex;
+`
+
 export const AllVideosContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,29 +46,46 @@ export const BannerButton = styled.button`
   cursor: pointer;
   border: 1px solid #212121;
   outline: none;
-  padding: 10px;
   margin-top: 20px;
+  height: 30px;
+  width: 130px;
+  background-color: transparent;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 `
+export const SearchInputContainer = styled.div`
+  margin-top: 20px;
+  display: flex;
+  border: 1px solid #000000;
+  background-color: transparent;
+  width: 50%;
+  justify-content: space-between;
+`
+
 export const SearchInput = styled.input`
   outline: none;
-  line-height: 40px;
+  line-height: 20px;
   color: #212121;
-  font-size: 14px;
+  font-size: 12px;
   font-family: 'Roboto';
   font-weight: 800;
-  border: 1px solid #000000;
+  border: none;
   padding-left: 12px;
-
   width: 60%;
+  background-color: transparent;
 `
 export const SearchButton = styled.button`
   cursor: pointer;
   border: 1px solid #212121;
   outline: none;
-  padding: 5px;
-  background-color: #cbd5e1;
-  height: 30px;
-  width: 30px;
+  background-color: #606060;
+  border: none;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 `
 export const NoSearchedVideosContainer = styled.div`
   display: flex;
@@ -79,18 +106,25 @@ export const NoSearchResults = styled.h1`
 `
 export const NoSearchResultStatus = styled.p`
   color: #ffffff;
-  font-family: 'Roboto';
   font-size: 10px;
+  font-family: 'Roboto';
   font-weight: 800;
 `
 export const NoSearchRetryButton = styled.button`
   cursor: pointer;
   outline: none;
-  padding: 5px;
   background-color: #4f46e5;
   height: 30px;
   width: 130px;
   border-radius: 6px;
+  border: none;
+  color: black;
+  font-size: 12px;
+  font-family: 'Roboto';
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 `
 export const FailureVideosContainer = styled.div`
   display: flex;

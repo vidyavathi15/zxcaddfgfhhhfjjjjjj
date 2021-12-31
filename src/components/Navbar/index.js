@@ -36,8 +36,7 @@ const Navbar = () => (
       const themeUrl = isDarkTheme
         ? 'https://assets.ccbp.in/frontend/react-js/light-theme-img.png'
         : 'https://assets.ccbp.in/frontend/react-js/dark-theme-img.png'
-
-      const navbarBg = isDarkTheme ? 'nav-bar-dark' : 'nav-bar-light'
+      const navbarBg = isDarkTheme ? '#181818' : '#ffffff'
 
       const onClickLogout = props => {
         const {history} = props
@@ -73,13 +72,15 @@ const Navbar = () => (
                   }
                   className="popup-content"
                 >
-                  <TextPopup>Are you sure, you want to logout?</TextPopup>
-                  <PopupButtonContainer>
-                    <CancelButton type="button">Cancel</CancelButton>
-                    <ConfirmButton type="button" onClick={onClickLogout}>
-                      Confirm
-                    </ConfirmButton>
-                  </PopupButtonContainer>
+                  <>
+                    <TextPopup>Are you sure, you want to logout?</TextPopup>
+                    <PopupButtonContainer>
+                      <CancelButton type="button">Cancel</CancelButton>
+                      <ConfirmButton type="button" onClick={onClickLogout}>
+                        Confirm
+                      </ConfirmButton>
+                    </PopupButtonContainer>
+                  </>
                 </Popup>
               </NavItem>
             </NavItemsListContainer>

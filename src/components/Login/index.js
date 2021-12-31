@@ -14,6 +14,7 @@ import {
   LoginButton,
   InputLabel,
   FormInput,
+  ErrorElement,
 } from './styledComponents'
 
 class Login extends Component {
@@ -36,9 +37,7 @@ class Login extends Component {
   onSubmitSuccess = jwtToken => {
     const {history} = this.props
 
-    Cookies.set('jwt_token', jwtToken, {
-      expires: 30,
-    })
+    Cookies.set('jwt_token', jwtToken, {expires: 30, path: '/'})
     history.replace('/')
   }
 
@@ -81,7 +80,6 @@ class Login extends Component {
     return (
       <>
         <InputLabel htmlFor="username">USERNAME</InputLabel>
-
         <FormInput
           id="username"
           type="text"
@@ -129,7 +127,7 @@ class Login extends Component {
     console.log(errorMsg)
     console.log(showSubmitError)
 
-    const jwtToken = Cookies.get('jwtToken')
+    const jwtToken = Cookies.get('jwt_token')
 
     if (jwtToken !== undefined) {
       return <Redirect to="/" />
@@ -160,7 +158,7 @@ class Login extends Component {
             </LabelForCheckbox>
           </CheckboxContainer>
           <LoginButton type="submit">Login</LoginButton>
-          {showSubmitError && <errorElement>*{errorMsg}</errorElement>}
+          {showSubmitError && <ErrorElement>*{errorMsg}</ErrorElement>}
         </FormContainer>
       </LoginFormContainer>
     )

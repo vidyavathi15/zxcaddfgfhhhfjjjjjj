@@ -28,27 +28,27 @@ const Sidebar = props => {
       <SidebarTopContainer>
         <ChangeButton type="button" onClick={onClickChangeColorIconOrText}>
           <HomeContainer>
-            <AiOutlineHome color="" />
+            <AiOutlineHome color=" #383838" size="20px" />
             <LinkItem to="/">Home</LinkItem>
           </HomeContainer>
         </ChangeButton>
 
         <ChangeButton type="button" onClick={onClickChangeColorIconOrText}>
           <HomeContainer>
-            <FaFirefoxBrowser color="" />
+            <FaFirefoxBrowser color=" #383838" size="20px" />
             <LinkItem to="/trending">Trending</LinkItem>
           </HomeContainer>
         </ChangeButton>
         <ChangeButton type="button" onClick={onClickChangeColorIconOrText}>
           <HomeContainer>
-            <SiYoutubegaming color="" />
+            <SiYoutubegaming color=" #383838" size="20px" />
             <LinkItem to="/gaming">Gaming</LinkItem>
           </HomeContainer>
         </ChangeButton>
 
         <ChangeButton type="button" onClick={onClickChangeColorIconOrText}>
           <HomeContainer>
-            <BiListPlus color="" />
+            <BiListPlus color=" #383838" size="20px" />
             <LinkItem to="/saved-videos">Saved videos</LinkItem>
           </HomeContainer>
         </ChangeButton>

@@ -28,48 +28,46 @@ import {
   NoSearchResults,
   NoSearchResultStatus,
   NoSearchRetryButton,
+  SearchInputContainer,
 } from './styledComponents'
 
 const apiStatusConstants = {
+  initial: 'INITIAL',
   success: 'SUCCESS',
   failure: 'FAILURE',
-  initial: 'INITIAL',
   inProgress: 'IN_PROGRESS',
 }
 
 class Home extends Component {
   state = {
     apiStatus: apiStatusConstants.initial,
+    searchInput: '',
     allVideos: [],
     channel: {},
-    searchInput: '',
   }
 
   componentDidMount() {
-    this.getAllVideosData()
-  }
-
-  onChangeSearchInput = event => {
-    this.setState({searchInput: event.target.value})
+    this.getVideos()
   }
 
   getFormattedData = data => ({
     id: data.id,
-
     title: data.title,
-
     thumbnailUrl: data.thumbnail_url,
     viewCount: data.view_count,
     publishedAt: data.published_at,
+    name: data.name,
+    profileImageUrl: data.profile_image_url,
   })
 
-  getAllVideosData = async () => {
+  getVideos = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
+
     const {searchInput} = this.state
 
-    const jwtToken = Cookies.get('jwtToken')
+    const jwtToken = Cookies.get('jwt_token')
 
-    const url = `https://apis.ccbp.in/videos/all?search= + ${searchInput}`
+    const url = `https://apis.ccbp.in/videos/all?search=${searchInput}`
 
     const options = {
       headers: {
@@ -88,7 +86,7 @@ class Home extends Component {
           this.getFormattedData(each),
         ),
         channelData: {
-          name: fetchedData.videos.chanel.name,
+          name: fetchedData.videos.channel.name,
           profileImageUrl: fetchedData.videos.channel.profile_image_url,
         },
       }
@@ -96,21 +94,24 @@ class Home extends Component {
       this.setState({
         allVideos: updatedData.allVideosUpdated,
         channel: updatedData.channelData,
+
         apiStatus: apiStatusConstants.success,
       })
-    } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
 
   onClickRetry = () => {
-    this.getAllVideosData()
+    this.getVideos()
   }
 
   renderSuccessView = () => {
     const {allVideos, channel} = this.state
     console.log(allVideos)
+    console.log(channel)
+
     const showNoSearchVideos = allVideos.length > 0
+
     return showNoSearchVideos ? (
       <SuccessViewListContainer>
         {allVideos.map(each => (
@@ -186,9 +187,12 @@ class Home extends Component {
     }
   }
 
-  changeColorOfText = () => {}
+  onChangeSearchInput = event => {
+    this.setState({searchInput: event.target.value})
+  }
 
   render() {
+    const {searchInput} = this.state
     return (
       <>
         <Navbar />
@@ -204,16 +208,17 @@ class Home extends Component {
               </BannerText>
               <BannerButton type="button">GET IT NOW</BannerButton>
             </BannerContainer>
-
-            <SearchInput
-              value={SearchInput}
-              onChange={this.onChangeSearchInput}
-              placeholder="search"
-              type="text"
-            />
-            <SearchButton type="button" data-testid="searchButton">
-              <BsSearch size="20px" />
-            </SearchButton>
+            <SearchInputContainer>
+              <SearchInput
+                type="search"
+                value={searchInput}
+                onChange={this.onChangeSearchInput}
+                placeholder="search"
+              />
+              <SearchButton type="button" data-testid="searchButton">
+                <BsSearch size="20px" />
+              </SearchButton>
+            </SearchInputContainer>
 
             {this.renderAllVideos()}
           </AllVideosContainer>

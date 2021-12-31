@@ -13,12 +13,17 @@ export const NavbarContentContainer = styled.div`
 export const WebsiteLogoImage = styled.img`
   height: 20px;
   width: 20px;
+  @media screen and (min-width: 768px) {
+    height: 30px;
+    width: 150px;
+  }
 `
 export const NavItemsListContainer = styled.ul`
   padding-left: 0px;
   margin: 0px;
   display: flex;
   align-items: center;
+  justify-content: space-around;
 `
 export const NavItem = styled.li`
   list-style-type: none;
@@ -27,25 +32,44 @@ export const ThemeButton = styled.button`
   outline: none;
   cursor: pointer;
   border: none;
+  background-color: transparent;
 `
 export const ThemeImage = styled.img`
   height: 20px;
   width: 20px;
+
+  @media screen and (min-width: 768px) {
+    height: 30px;
+    width: 30px;
+  }
 `
 export const ProfileImage = styled.img`
   height: 15px;
   width: 15px;
+  @media screen and (min-width: 768px) {
+    height: 30px;
+    width: 30px;
+  }
 `
 export const LogoutButton = styled.button`
   outline: none;
   cursor: pointer;
-  border: 1px solid #63d6f2;
-  color: #63d6f2;
+  border: 1px solid #475569;
+  color: #475569;
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
   padding: 10px;
+  height: 30px;
+  width: 100px;
   margin-left: 10px;
+  border-radius: 6px;
+  background-color: transparent;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
 `
 export const TextPopup = styled.p`
   color: #ffffff;
@@ -66,6 +90,10 @@ export const CancelButton = styled.button`
   font-family: 'Roboto';
   background-color: 'transparent';
   font-weight: 800;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 `
 export const ConfirmButton = styled.button`
   background-color: #3b82f6;
@@ -75,4 +103,8 @@ export const ConfirmButton = styled.button`
   cursor: pointer;
   outline: none;
   border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 `

@@ -14,7 +14,7 @@ export const WebsiteLogoMobileImage = styled.img`
     display: none;
   }
 `
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +80,7 @@ export const LoginButton = styled.button`
   background-color: blue;
 `
 
-export const errorElement = styled.p`
+export const ErrorElement = styled.p`
   color: #ff0000;
   font-size: 12px;
   font-family: 'Roboto';
@@ -96,14 +96,12 @@ export const FormInput = styled.input`
   font-size: 14px;
   height: 40px;
   border: 1px solid #d7dfe9;
-
   color: #64748b;
   border-radius: 2px;
   margin-top: 5px;
   padding: 8px 16px 8px 16px;
   outline: none;
   background-color: transparent;
-
   width: 100%;
   outline: none;
 `
