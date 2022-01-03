@@ -56,8 +56,6 @@ class Home extends Component {
     thumbnailUrl: data.thumbnail_url,
     viewCount: data.view_count,
     publishedAt: data.published_at,
-    name: data.name,
-    profileImageUrl: data.profile_image_url,
   })
 
   getVideos = async () => {
@@ -81,22 +79,28 @@ class Home extends Component {
     if (response.ok) {
       const fetchedData = await response.json()
 
-      const updatedData = {
+      const updatedDataOfAllVideos = {
         allVideosUpdated: fetchedData.videos.map(each =>
           this.getFormattedData(each),
         ),
-        channelData: {
-          name: fetchedData.videos.channel.name,
-          profileImageUrl: fetchedData.videos.channel.profile_image_url,
-        },
       }
 
+      const updatedChannelData = fetchedData.videos.map(each => ({
+        channel: each.channel,
+      }))
+
+      const conversionChannel = updatedChannelData.map(each => ({
+        name: each.channel.name,
+        profileImageUrl: each.channel.profile_image_url,
+      }))
+
       this.setState({
-        allVideos: updatedData.allVideosUpdated,
-        channel: updatedData.channelData,
+        allVideos: updatedDataOfAllVideos.allVideosUpdated,
+        channel: conversionChannel,
 
         apiStatus: apiStatusConstants.success,
       })
+    } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
