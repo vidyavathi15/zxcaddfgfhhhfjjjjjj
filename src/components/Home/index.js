@@ -111,8 +111,6 @@ class Home extends Component {
 
   renderSuccessView = () => {
     const {allVideos, channel} = this.state
-    console.log(allVideos)
-    console.log(channel)
 
     const showNoSearchVideos = allVideos.length > 0
 
@@ -122,8 +120,7 @@ class Home extends Component {
           <VideoItem
             key={each.id}
             singleVideoDetails={each}
-            allVideos={allVideos}
-            channel={channel}
+            channelDetails={channel}
           />
         ))}
       </SuccessViewListContainer>

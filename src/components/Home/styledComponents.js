@@ -168,4 +168,5 @@ export const SuccessViewListContainer = styled.ul`
   flex-wrap: wrap;
   padding-left: 0px;
   margin: 0px;
+  margin-top: 30px;
 `

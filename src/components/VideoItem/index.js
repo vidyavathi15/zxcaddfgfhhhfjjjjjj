@@ -1,6 +1,4 @@
-import {formatDistanceToNow} from 'date-fns'
 import {Link} from 'react-router-dom'
-
 import {
   VideoListItem,
   ThumbnailImage,
@@ -14,29 +12,28 @@ import {
 } from './styledComponents'
 
 const VideoItem = props => {
-  const {allVideos, channel} = props
-  const {title, id, thumbnailUrl, viewCount, publishedAt} = allVideos
-  const {name, profileImageUrl} = channel
+  const {singleVideoDetails, channelDetails} = props
 
-  const postedDate = formatDistanceToNow(new Date(publishedAt))
+  const {title, id, thumbnailUrl, viewCount, publishedAt} = singleVideoDetails
+  const {name, profileImageUrl} = channelDetails
 
   return (
-    <Link to={`/videos/${id}`}>
-      <VideoListItem>
+    <VideoListItem>
+      <Link to={`/videos/${id}`}>
         <ThumbnailImage src={thumbnailUrl} alt="video thumbnail" />
-        <ListBottomContainer>
-          <ProfileImage src={profileImageUrl} alt="channel logo" />
-          <InformationBottomContainer>
-            <VideoTitle>{title}</VideoTitle>
-            <VideoName>{name}</VideoName>
-            <VideoCount>
-              {viewCount} Views
-              <VideoPostedDate> . {postedDate}</VideoPostedDate>
-            </VideoCount>
-          </InformationBottomContainer>
-        </ListBottomContainer>
-      </VideoListItem>
-    </Link>
+      </Link>
+      <ListBottomContainer>
+        <ProfileImage src={profileImageUrl} alt="channel logo" />
+        <InformationBottomContainer>
+          <VideoTitle>{title}</VideoTitle>
+          <VideoName>{name}</VideoName>
+          <VideoCount>
+            {viewCount} Views
+            <VideoPostedDate>.{publishedAt}</VideoPostedDate>
+          </VideoCount>
+        </InformationBottomContainer>
+      </ListBottomContainer>
+    </VideoListItem>
   )
 }
 
