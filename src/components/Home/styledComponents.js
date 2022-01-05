@@ -11,26 +11,28 @@ export const BannerContainer = styled.div`
   flex-direction: column;
   border-radius: 6px;
   @media screen and (min-width: 768px) {
-    height: 50%;
-    width: 50%;
+    height: 30%;
+    width: 70%;
   }
 `
 export const AppContainer = styled.div`
   min-height: 100vh;
   background-color: #00306e;
   box-shadow: 0px 0px 0px 1px #dcdcdc;
+  width: 100%;
 `
 
 export const SideAndVideosContainer = styled.div`
   display: flex;
+  min-height: 100vh;
+  width: 100%;
 `
 
 export const AllVideosContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 `
 export const ImageLogo = styled.img`
   height: 25px;
@@ -60,7 +62,7 @@ export const SearchInputContainer = styled.div`
   display: flex;
   border: 1px solid #000000;
   background-color: transparent;
-  width: 50%;
+  width: 70%;
   justify-content: space-between;
 `
 
@@ -162,6 +164,7 @@ export const LoaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `
 export const SuccessViewListContainer = styled.ul`
   display: flex;

@@ -4,6 +4,7 @@ import Loader from 'react-loader-spinner'
 import {BsSearch} from 'react-icons/bs'
 import Navbar from '../Navbar'
 import VideoItem from '../VideoItem'
+import Sidebar from '../Sidebar'
 
 import ThemeContext from '../../context/ThemeContext'
 
@@ -29,6 +30,7 @@ import {
   NoSearchResultStatus,
   NoSearchRetryButton,
   SearchInputContainer,
+  SideAndVideosContainer,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -43,7 +45,6 @@ class Home extends Component {
     apiStatus: apiStatusConstants.initial,
     searchInput: '',
     allVideos: [],
-    channel: {},
   }
 
   componentDidMount() {
@@ -56,6 +57,9 @@ class Home extends Component {
     thumbnailUrl: data.thumbnail_url,
     viewCount: data.view_count,
     publishedAt: data.published_at,
+
+    name: data.channel.name,
+    profileImageUrl: data.channel.profile_image_url,
   })
 
   getVideos = async () => {
@@ -85,18 +89,8 @@ class Home extends Component {
         ),
       }
 
-      const updatedChannelData = fetchedData.videos.map(each => ({
-        channel: each.channel,
-      }))
-
-      const conversionChannel = updatedChannelData.map(each => ({
-        name: each.channel.name,
-        profileImageUrl: each.channel.profile_image_url,
-      }))
-
       this.setState({
         allVideos: updatedDataOfAllVideos.allVideosUpdated,
-        channel: conversionChannel,
 
         apiStatus: apiStatusConstants.success,
       })
@@ -110,18 +104,14 @@ class Home extends Component {
   }
 
   renderSuccessView = () => {
-    const {allVideos, channel} = this.state
+    const {allVideos} = this.state
 
     const showNoSearchVideos = allVideos.length > 0
 
     return showNoSearchVideos ? (
       <SuccessViewListContainer>
         {allVideos.map(each => (
-          <VideoItem
-            key={each.id}
-            singleVideoDetails={each}
-            channelDetails={channel}
-          />
+          <VideoItem key={each.id} singleVideoDetails={each} />
         ))}
       </SuccessViewListContainer>
     ) : (
@@ -198,31 +188,34 @@ class Home extends Component {
       <>
         <Navbar />
         <AppContainer data-testid="home">
-          <AllVideosContainer>
-            <BannerContainer>
-              <ImageLogo
-                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                alt="website logo"
-              />
-              <BannerText>
-                Buy Nxt Watch Premium prepaid plans with UPI
-              </BannerText>
-              <BannerButton type="button">GET IT NOW</BannerButton>
-            </BannerContainer>
-            <SearchInputContainer>
-              <SearchInput
-                type="search"
-                value={searchInput}
-                onChange={this.onChangeSearchInput}
-                placeholder="search"
-              />
-              <SearchButton type="button" data-testid="searchButton">
-                <BsSearch size="20px" />
-              </SearchButton>
-            </SearchInputContainer>
+          <SideAndVideosContainer>
+            <Sidebar />
+            <AllVideosContainer>
+              <BannerContainer>
+                <ImageLogo
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+                  alt="website logo"
+                />
+                <BannerText>
+                  Buy Nxt Watch Premium prepaid plans with UPI
+                </BannerText>
+                <BannerButton type="button">GET IT NOW</BannerButton>
+              </BannerContainer>
+              <SearchInputContainer>
+                <SearchInput
+                  type="search"
+                  value={searchInput}
+                  onChange={this.onChangeSearchInput}
+                  placeholder="search"
+                />
+                <SearchButton type="button" data-testid="searchButton">
+                  <BsSearch size="20px" />
+                </SearchButton>
+              </SearchInputContainer>
 
-            {this.renderAllVideos()}
-          </AllVideosContainer>
+              {this.renderAllVideos()}
+            </AllVideosContainer>
+          </SideAndVideosContainer>
         </AppContainer>
       </>
     )

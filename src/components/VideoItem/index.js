@@ -1,4 +1,6 @@
 import {Link} from 'react-router-dom'
+import {formatDistanceToNow} from 'date-fns'
+
 import {
   VideoListItem,
   ThumbnailImage,
@@ -12,10 +14,19 @@ import {
 } from './styledComponents'
 
 const VideoItem = props => {
-  const {singleVideoDetails, channelDetails} = props
+  const {singleVideoDetails} = props
 
-  const {title, id, thumbnailUrl, viewCount, publishedAt} = singleVideoDetails
-  const {name, profileImageUrl} = channelDetails
+  const {
+    title,
+    id,
+    thumbnailUrl,
+    viewCount,
+    publishedAt,
+    name,
+    profileImageUrl,
+  } = singleVideoDetails
+
+  const postedDate = formatDistanceToNow(new Date(publishedAt))
 
   return (
     <VideoListItem>
@@ -29,7 +40,7 @@ const VideoItem = props => {
           <VideoName>{name}</VideoName>
           <VideoCount>
             {viewCount} Views
-            <VideoPostedDate>.{publishedAt}</VideoPostedDate>
+            <VideoPostedDate>.{postedDate}</VideoPostedDate>
           </VideoCount>
         </InformationBottomContainer>
       </ListBottomContainer>
