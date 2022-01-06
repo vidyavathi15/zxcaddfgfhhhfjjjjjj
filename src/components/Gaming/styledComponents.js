@@ -22,13 +22,13 @@ export const GamingFailureImage = styled.img`
   width: 150px;
 `
 export const GamingFailureResults = styled.h1`
-  color: #ffffff;
+  color: #616e7c;
   font-size: 20px;
   font-family: 'Roboto';
   font-weight: 800;
 `
 export const GamingFailureResultsStatus = styled.p`
-  color: #ffffff;
+  color: #616e7c
   font-size: 18px;
   font-family: 'Roboto';
   font-weight: 800;
@@ -36,10 +36,13 @@ export const GamingFailureResultsStatus = styled.p`
 export const FailureVideosRetryButton = styled.button`
   cursor: pointer;
   outline: none;
-
+  border: none;
+  background-color: #4f46e5;
+  height: 30px;
+  width: 70px;
   border-radius: 4px;
   padding: 12px;
-  color: #ffffff;
+  color: #616e7c;
   font-family: 'Roboto';
   font-weight: 800;
 `

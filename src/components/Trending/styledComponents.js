@@ -10,7 +10,7 @@ export const TrendingListContainer = styled.ul`
   display: flex;
   padding-left: 0px;
   margin: 0px;
-  flex-wrap: wrap;
+  flex-direction: column;
 `
 export const FailureTrendingContainer = styled.div`
   display: flex;
@@ -24,13 +24,13 @@ export const TrendingFailureImage = styled.img`
   margin-top: 20px;
 `
 export const TrendingFailureResults = styled.h1`
-  color: #ffffff;
+  color: #475569;
   font-size: 18px;
   font-family: 'Roboto';
   font-weight: 800;
 `
 export const TrendingFailureResultsStatus = styled.p`
-  color: #616e7c;
+  color: #475569;
   font-size: 14px;
   font-family: 'Roboto';
   font-weight: 800;
@@ -44,6 +44,10 @@ export const FailureTrendingRetryButton = styled.button`
   font-size: 10px;
   font-family: 'Roboto';
   font-weight: 800;
+  color: #475569;
+  border: none;
+  height: 30px;
+  width: 70px;
 `
 export const LoaderContainer = styled.div`
   display: flex;

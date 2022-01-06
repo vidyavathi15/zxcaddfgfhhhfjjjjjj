@@ -60,19 +60,17 @@ export const LogoutButton = styled.button`
   font-family: 'Roboto';
   font-weight: 800;
   padding: 10px;
-  height: 30px;
-  width: 100px;
   margin-left: 10px;
   border-radius: 6px;
   background-color: transparent;
   padding-left: 10px;
   padding-right: 10px;
-  text-align: center;
+
   padding-bottom: 10px;
   padding-top: 10px;
 `
 export const TextPopup = styled.p`
-  color: #ffffff;
+  color: #475569;
   font-size: 14px;
   font-family: 'Roboto';
   font-weight: 800;
@@ -84,8 +82,8 @@ export const PopupButtonContainer = styled.div`
 export const CancelButton = styled.button`
   cursor: pointer;
   outline: none;
-  border: 1px solid #ffffff;
-  color: #ffffff;
+
+  color: black;
   font-size: 14px;
   font-family: 'Roboto';
   background-color: 'transparent';
@@ -94,10 +92,12 @@ export const CancelButton = styled.button`
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  border: none;
+  border-radius: 4px;
 `
 export const ConfirmButton = styled.button`
   background-color: #3b82f6;
-  color: #ffffff;
+  color: #475569;
   font-size: 14px;
   font-family: 'Roboto';
   cursor: pointer;
@@ -107,4 +107,12 @@ export const ConfirmButton = styled.button`
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  border-radius: 4px;
+`
+export const NavItemContainer = styled.div`
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
 `

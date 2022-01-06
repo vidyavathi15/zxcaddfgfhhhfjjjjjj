@@ -39,7 +39,7 @@ class Gaming extends Component {
   getGamingData = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
 
-    const jwtToken = Cookies.get('jwtToken')
+    const jwtToken = Cookies.get('jwt_token')
 
     const url = 'https://apis.ccbp.in/videos/gaming'
 

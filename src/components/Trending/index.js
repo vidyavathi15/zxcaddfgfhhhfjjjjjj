@@ -22,7 +22,7 @@ const apiStatusConstants = {
 }
 
 class Trending extends Component {
-  state = {trendingVideos: [], trendingChannel: {}}
+  state = {trendingVideos: [], apiStatus: apiStatusConstants.initial}
 
   componentDidMount() {
     this.getTrendingData()
@@ -34,12 +34,14 @@ class Trending extends Component {
     viewCount: data.view_count,
     thumbnailUrl: data.thumbnail_url,
     publishedAt: data.published_at,
+    name: data.channel.name,
+    profileImageUrl: data.channel.profile_image_url,
   })
 
   getTrendingData = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
 
-    const jwtToken = Cookies.get('jwtToken')
+    const jwtToken = Cookies.get('jwt_token')
 
     const url = 'https://apis.ccbp.in/videos/trending'
 
@@ -59,14 +61,9 @@ class Trending extends Component {
         trendingUpdatedData: fetchedData.videos.map(each =>
           this.getFormattedData(each),
         ),
-        trendingFetchedChannel: {
-          name: fetchedData.videos.channel.name,
-          profileImageUrl: fetchedData.videos.channel.profile_image_url,
-        },
       }
 
       this.setState({
-        trendingChannel: updatedData.trendingFetchedChannel,
         trendingVideos: updatedData.trendingUpdatedData,
         apiStatus: apiStatusConstants.success,
       })
@@ -76,23 +73,19 @@ class Trending extends Component {
   }
 
   renderTrendingSuccessView = () => {
-    const {trendingVideos, trendingChannel} = this.state
+    const {trendingVideos} = this.state
     console.log(trendingVideos)
     return (
       <TrendingListContainer>
         {trendingVideos.map(each => (
-          <TrendingItem
-            key={each.id}
-            trendingDetails={each}
-            trendingChannel={trendingChannel}
-          />
+          <TrendingItem key={each.id} trendingDetails={each} />
         ))}
       </TrendingListContainer>
     )
   }
 
   onClickRetry = () => {
-    this.getGamingData()
+    this.getTrendingData()
   }
 
   renderTrendingFailureView = () => (
@@ -114,7 +107,10 @@ class Trending extends Component {
               We are having Some trouble to complete your request, please try
               again.
             </TrendingFailureResultsStatus>
-            <FailureTrendingRetryButton onClick={this.onClickRetry}>
+            <FailureTrendingRetryButton
+              type="button"
+              onClick={this.onClickRetry}
+            >
               Retry
             </FailureTrendingRetryButton>
           </FailureTrendingContainer>

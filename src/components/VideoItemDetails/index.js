@@ -19,11 +19,7 @@ import {
   VideoItemDetailsTitle,
   ViewsAndLikeContainerMiddleContainer,
   ViewsCountContainer,
-  LikeButton,
-  SaveContainer,
-  LikesContainer,
   LikeText,
-  DisLikeContainer,
   DisLikeText,
   SaveText,
   ReactPlayerContainer,
@@ -38,6 +34,8 @@ import {
   VideoItemDate,
   LikesAndDisLikeContainer,
   VideoItemDetailsDescriptionDisplay,
+  ListItem,
+  VideoItemDetailsAppContainer,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -48,7 +46,7 @@ const apiStatusConstants = {
 }
 
 class VideoItemDetails extends Component {
-  state = {videoDetails: {}, channel: {}}
+  state = {videoDetails: {}}
 
   componentDidMount() {
     this.getVideoItemDetailsData()
@@ -62,6 +60,9 @@ class VideoItemDetails extends Component {
     videoUrl: data.video_url,
     publishedAt: data.published_at,
     description: data.description,
+    name: data.channel.name,
+    profileImageUrl: data.channel.profile_image_url,
+    subScriberCount: data.channel.subscriber_count,
   })
 
   getVideoItemDetailsData = async () => {
@@ -71,7 +72,7 @@ class VideoItemDetails extends Component {
     const {params} = match
     const {id} = params
 
-    const jwtToken = Cookies.get('jwtToken')
+    const jwtToken = Cookies.get('jwt_token')
 
     const url = `https://apis.ccbp.in/videos/${id}`
 
@@ -88,16 +89,12 @@ class VideoItemDetails extends Component {
       const fetchedData = await response.json()
 
       const updatedData = {
-        videoDetails: this.getFormattedData(fetchedData.videoDetails),
-        channelData: {
-          name: fetchedData.videos.channel.name,
-          ProfileImageUrl: fetchedData.videoDetails.chanel.profile_image_url,
-          subScriberCount: fetchedData.videoDetails.channel.subscribed_count,
-        },
+        videoDetails: this.getFormattedData(fetchedData.video_details),
       }
+
       this.setState({
         videoDetails: updatedData.videoDetails,
-        channel: updatedData.channelData,
+
         apiStatus: apiStatusConstants.success,
       })
     } else {
@@ -114,7 +111,7 @@ class VideoItemDetails extends Component {
           addingAndDeletingToSavedVideos,
         } = value
 
-        const {videoDetails, channel} = this.state
+        const {videoDetails} = this.state
         const {
           id,
           videoUrl,
@@ -122,14 +119,16 @@ class VideoItemDetails extends Component {
           publishedAt,
           viewCount,
           description,
+          profileImageUrl,
+          subScriberCount,
+          name,
         } = videoDetails
-        const {ProfileImageUrl, subScriberCount, name} = channel
 
         const postedDate = formatDistanceToNow(new Date(publishedAt))
 
         const colorChangeTextOrIcon = isLiked ? '#2563eb' : '#64748b'
 
-        const disLikeColorText = isLiked ? '#64748b' : '#2563eb'
+        const disLikeColorText = isLiked ? '#2563eb' : '#64748b'
 
         const saveToSavedText = isLiked ? 'Saved' : 'Save'
 
@@ -146,62 +145,76 @@ class VideoItemDetails extends Component {
         }
 
         return (
-          <>
+          <VideoItemDetailsAppContainer>
             <ReactPlayerContainer>
               <ReactPlayer url={videoUrl} controls />
             </ReactPlayerContainer>
             <VideoItemDetailsTitle>{title}</VideoItemDetailsTitle>
             <ViewsAndLikeContainerMiddleContainer>
               <ViewsCountContainer>
-                <ViewsCount>{viewCount}</ViewsCount>
-                <VideoItemDate>{postedDate}</VideoItemDate>
+                <ViewsCount>{viewCount}views </ViewsCount>
+                <VideoItemDate> . {postedDate}</VideoItemDate>
               </ViewsCountContainer>
               <LikesAndDisLikeContainer>
-                <LikeButton type="button" onClick={onClickIconOrText}>
-                  <LikesContainer>
-                    <AiOutlineLike
-                      colorChangeTextOrIcon={colorChangeTextOrIcon}
-                    />
-                    <LikeText colorChangeTextOrIcon={colorChangeTextOrIcon}>
-                      Like
-                    </LikeText>
-                  </LikesContainer>
-                </LikeButton>
+                <ListItem>
+                  <AiOutlineLike
+                    color={colorChangeTextOrIcon}
+                    onClick={onClickIconOrText}
+                  />
+                  <LikeText
+                    color={colorChangeTextOrIcon}
+                    onClick={onClickIconOrText}
+                  >
+                    Like
+                  </LikeText>
+                </ListItem>
 
-                <LikeButton type="button" onClick={onClickIconOrDisLikeText}>
-                  <DisLikeContainer>
-                    <BiDislike color={disLikeColorText} />
-                    <DisLikeText color={disLikeColorText}>DisLike</DisLikeText>
-                  </DisLikeContainer>
-                </LikeButton>
+                <ListItem>
+                  <BiDislike
+                    color={disLikeColorText}
+                    onClick={onClickIconOrDisLikeText}
+                  />
+                  <DisLikeText
+                    color={disLikeColorText}
+                    onClick={onClickIconOrDisLikeText}
+                  >
+                    DisLike
+                  </DisLikeText>
+                </ListItem>
 
-                <LikeButton type="button" onClick={onClickIconOrSaveText}>
-                  <SaveContainer>
-                    <BiListPlus colorChangeTextOrIcon={colorChangeTextOrIcon} />
-                    <SaveText>{saveToSavedText}</SaveText>
-                  </SaveContainer>
-                </LikeButton>
+                <ListItem>
+                  <BiListPlus
+                    color={colorChangeTextOrIcon}
+                    onClick={onClickIconOrSaveText}
+                  />
+                  <SaveText
+                    onClick={onClickIconOrText}
+                    color={colorChangeTextOrIcon}
+                  >
+                    {saveToSavedText}
+                  </SaveText>
+                </ListItem>
               </LikesAndDisLikeContainer>
             </ViewsAndLikeContainerMiddleContainer>
             <HrLine />
             <VideoItemDetailsBottomContainer>
               <VideoItemDetailSubPartContainer>
                 <VideoItemDetailsProfileImage
-                  src={ProfileImageUrl}
+                  src={profileImageUrl}
                   alt={name}
                 />
                 <VideoItemDetailsDescriptionContainer>
                   <VideoItemDetailsName>{name}</VideoItemDetailsName>
                   <VideoItemDetailsSubscribers>
-                    {subScriberCount} subScribers
+                    {subScriberCount} subscribers
                   </VideoItemDetailsSubscribers>
+                  <VideoItemDetailsDescriptionDisplay>
+                    {description}
+                  </VideoItemDetailsDescriptionDisplay>
                 </VideoItemDetailsDescriptionContainer>
               </VideoItemDetailSubPartContainer>
-              <VideoItemDetailsDescriptionDisplay>
-                {description}
-              </VideoItemDetailsDescriptionDisplay>
             </VideoItemDetailsBottomContainer>
-          </>
+          </VideoItemDetailsAppContainer>
         )
       }}
     </ThemeContext.Consumer>
@@ -244,7 +257,7 @@ class VideoItemDetails extends Component {
 
   renderLoadingVideoItemDetailsView = () => (
     <LoaderContainer data-testid="loader">
-      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+      <Loader type="ThreeDots" color="#3b82f6" height="50" width="50" />
     </LoaderContainer>
   )
 

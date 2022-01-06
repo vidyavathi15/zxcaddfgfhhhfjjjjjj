@@ -10,6 +10,8 @@ import Trending from './components/Trending'
 import Gaming from './components/Gaming'
 import VideoItemDetails from './components/VideoItemDetails'
 
+import SavedVideos from './components/SavedVideos'
+
 import NotFound from './components/NotFound'
 import ThemeContext from './context/ThemeContext'
 
@@ -64,7 +66,7 @@ class App extends Component {
             path="/videos/:id"
             component={VideoItemDetails}
           />
-
+          <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
           <Route path="/not-found" component={NotFound} />
           <Redirect to="not-found" />
         </Switch>

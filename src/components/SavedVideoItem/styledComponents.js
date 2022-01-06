@@ -1,5 +1,9 @@
 import styled from 'styled-components/macro'
+import {Link} from 'react-router-dom'
 
+export const LinkItem = styled(Link)`
+  text-decoration: none;
+`
 export const SavedVideosListItem = styled.li`
   list-style-type: none;
   display: flex;
@@ -21,25 +25,25 @@ export const SavedInformationContainer = styled.div`
   padding: 10px;
 `
 export const SavedTitle = styled.h1`
-  color: #ffffff;
+  color: #64748b;
   font-size: 20px;
   font-family: 'Roboto';
   font-weight: 800;
 `
 export const SavedName = styled.p`
-  color: #ffffff;
+  color: #64748b;
   font-size: 13px;
   font-family: 'Roboto';
   font-weight: 800;
 `
 export const SavedViewCount = styled.p`
-  color: #ffffff;
+  color: #64748b;
   font-size: 13px;
   font-family: 'Roboto';
   font-weight: 800;
 `
 export const SavedVideoPostedDate = styled.span`
-  color: #ffffff;
+  color: #64748b;
   font-size: 13px;
   font-family: 'Roboto';
   font-weight: 800;

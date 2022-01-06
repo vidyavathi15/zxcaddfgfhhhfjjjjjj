@@ -1,5 +1,4 @@
 import {formatDistanceToNow} from 'date-fns'
-import {Link} from 'react-router-dom'
 
 import {
   TrendingListItem,
@@ -9,16 +8,24 @@ import {
   TrendingViewCount,
   PostedDateEl,
   TrendingNam,
+  LinkItem,
 } from './styledComponents'
 
 const TrendingItem = props => {
-  const {trendingDetails, trendingChannel} = props
-  const {id, title, thumbnailUrl, viewCount, publishedAt} = trendingDetails
-  const {name} = trendingChannel
+  const {trendingDetails} = props
+  const {
+    id,
+    title,
+    thumbnailUrl,
+    viewCount,
+    publishedAt,
+    name,
+  } = trendingDetails
+
   const postedDate = formatDistanceToNow(new Date(publishedAt))
 
   return (
-    <Link to={`/videos/${id}`}>
+    <LinkItem to={`/videos/${id}`}>
       <TrendingListItem>
         <ThumbnailImage src={thumbnailUrl} alt="thumbnail" />
         <TrendingInformationContainer>
@@ -30,7 +37,7 @@ const TrendingItem = props => {
           </TrendingViewCount>
         </TrendingInformationContainer>
       </TrendingListItem>
-    </Link>
+    </LinkItem>
   )
 }
 

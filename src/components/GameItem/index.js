@@ -1,10 +1,10 @@
-import {Link} from 'react-router-dom'
-
 import {
   GameListItem,
   ThumbnailImage,
   GameItemTitle,
   ViewCountEl,
+  LinkItem,
+  ViewCountText,
 } from './styledComponents'
 
 const GameItem = props => {
@@ -12,16 +12,16 @@ const GameItem = props => {
   const {id, title, viewCount, thumbnailUrl} = gameItemDetails
 
   return (
-    <Link to={`/videos/${id}`}>
+    <LinkItem to={`/videos/${id}`}>
       <GameListItem>
         <ThumbnailImage src={thumbnailUrl} alt="thumbnail" />
         <GameItemTitle>{title}</GameItemTitle>
         <ViewCountEl>
           {viewCount}
-          <viewCountText>Watching Worldwide</viewCountText>
+          <ViewCountText>Watching Worldwide</ViewCountText>
         </ViewCountEl>
       </GameListItem>
-    </Link>
+    </LinkItem>
   )
 }
 

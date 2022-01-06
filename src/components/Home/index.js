@@ -57,7 +57,6 @@ class Home extends Component {
     thumbnailUrl: data.thumbnail_url,
     viewCount: data.view_count,
     publishedAt: data.published_at,
-
     name: data.channel.name,
     profileImageUrl: data.channel.profile_image_url,
   })
@@ -182,6 +181,12 @@ class Home extends Component {
     this.setState({searchInput: event.target.value})
   }
 
+  enterSearchInput = event => {
+    if (event.key === 'Enter') {
+      this.getVideos()
+    }
+  }
+
   render() {
     const {searchInput} = this.state
     return (
@@ -207,6 +212,7 @@ class Home extends Component {
                   value={searchInput}
                   onChange={this.onChangeSearchInput}
                   placeholder="search"
+                  onKeyDown={this.enterSearchInput}
                 />
                 <SearchButton type="button" data-testid="searchButton">
                   <BsSearch size="20px" />

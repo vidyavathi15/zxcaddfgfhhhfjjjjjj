@@ -1,5 +1,5 @@
 import {formatDistanceToNow} from 'date-fns'
-import {Link} from 'react-router-dom'
+
 import {
   SavedInformationContainer,
   SavedTitle,
@@ -8,6 +8,7 @@ import {
   SavedVideoPostedDate,
   SavedVideosListItem,
   SavedVideosThumbnailImage,
+  LinkItem,
 } from './styledComponents'
 
 const SavedVideoItem = props => {
@@ -16,10 +17,9 @@ const SavedVideoItem = props => {
   const postedDate = formatDistanceToNow(new Date(publishedAt))
 
   return (
-    <Link to={`/saved-videos/${id}`}>
+    <LinkItem to={`/video/${id}`}>
       <SavedVideosListItem>
         <SavedVideosThumbnailImage src={thumbnailUrl} alt={name} />
-
         <SavedInformationContainer>
           <SavedTitle>{title}</SavedTitle>
           <SavedName>{name}</SavedName>
@@ -29,7 +29,7 @@ const SavedVideoItem = props => {
           </SavedViewCount>
         </SavedInformationContainer>
       </SavedVideosListItem>
-    </Link>
+    </LinkItem>
   )
 }
 

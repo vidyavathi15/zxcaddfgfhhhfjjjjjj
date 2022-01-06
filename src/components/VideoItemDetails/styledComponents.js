@@ -31,13 +31,13 @@ export const FailureVideoItemDetailsImage = styled.img`
   }
 `
 export const FailureVideoItemDetailsStatus = styled.h1`
-  color: #ffffff;
+  color: #7e858e;
   font-size: 20px;
   font-family: 'Roboto';
   font-weight: 800;
 `
 export const FailureVideoItemDetailsErrorMsg = styled.p`
-  color: #ffffff;
+  color: #7e858e;
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
@@ -49,7 +49,7 @@ export const RetryButton = styled.button`
   padding: 15px;
   height: 30px;
   width: 140px;
-  color: #ffffff;
+  color: #7e858e;
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
@@ -60,7 +60,7 @@ export const ReactPlayerContainer = styled.div`
   border-radius: 6px;
 `
 export const VideoItemDetailsTitle = styled.h1`
-  color: #ffffff;
+  color: #7e858e;
   font-size: 22px;
   font-family: 'Roboto';
   font-weight: 800;
@@ -75,18 +75,18 @@ export const ViewsCountContainer = styled.div`
   display: flex;
 `
 export const ViewsCount = styled.p`
-  color: #ffffff;
+  color: #7e858e;
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
 `
 export const VideoItemDate = styled.p`
-  color: #ffffff;
+  color: #7e858e;
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
 `
-export const LikesAndDisLikeContainer = styled.div`
+export const LikesAndDisLikeContainer = styled.ul`
   display: flex;
   align-items: center;
 `
@@ -94,36 +94,35 @@ export const LikeButton = styled.button`
   outline: none;
   cursor: pointer;
   border: none;
+  background-color: transparent;
 `
-export const LikesContainer = styled.div`
+export const ListItem = styled.li`
   display: flex;
   align-items: center;
+  margin: 10px;
 `
 export const LikeText = styled.p`
-  color: #ffffff;
+  color: ${props => props.color};
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
+  margin-left: 10px;
 `
-export const DisLikeContainer = styled.div`
-  display: flex;
-  align-items: center;
-`
+
 export const DisLikeText = styled.p`
-  color: #ffffff;
+  color: ${props => props.color};
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
+  margin-left: 10px;
 `
-export const SaveContainer = styled.div`
-  display: flex;
-  align-items: center;
-`
+
 export const SaveText = styled.p`
-  color: #ffffff;
+  color: ${props => props.color};
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
+  margin-left: 10px;
 `
 export const HrLine = styled.hr`
   width: 100%;
@@ -133,6 +132,7 @@ export const HrLine = styled.hr`
 export const VideoItemDetailsBottomContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0px;
 `
 export const VideoItemDetailSubPartContainer = styled.div`
   display: flex;
@@ -146,6 +146,7 @@ export const VideoItemDetailsProfileImage = styled.img`
 export const VideoItemDetailsDescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
 `
 export const VideoItemDetailsName = styled.p`
   color: #909090;
@@ -164,4 +165,9 @@ export const VideoItemDetailsDescriptionDisplay = styled.p`
   font-size: 13px;
   font-family: 'Roboto';
   font-weight: 800;
+`
+export const VideoItemDetailsAppContainer = styled.div`
+  min-height: 100vh;
+  background-color: transparent;
+  padding: 20px;
 `

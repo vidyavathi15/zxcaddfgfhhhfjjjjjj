@@ -11,21 +11,31 @@ export const SidebarContainer = styled.div`
     width: 30%;
   }
 `
-export const SidebarTopContainer = styled.div`
+export const SidebarTopContainer = styled.ul`
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
-  padding: 10px;
+  margin: 0px;
+  padding-left: 0px;
+  margin-top: 20px;
 `
-export const HomeContainer = styled.div`
+export const ListItem = styled.li`
   display: flex;
   align-items: center;
+  list-style-type: none;
+  margin-bottom: 10px;
 `
 export const LinkItem = styled(Link)`
+  font-size: 10px;
   text-decoration: none;
-  font-size: 20px;
   font-family: 'Roboto';
-  color: #ffffff;
+  padding-left: 10px;
+
+  font-weight: 800;
+  color: white;
+
+  @media screen and (min-width: 768px) {
+    font-size: 10px;
+  }
 `
 export const SidebarBottomContainer = styled.div`
   display: flex;
@@ -53,10 +63,4 @@ export const FooterText = styled.p`
   font-family: 'Roboto';
   color: #ffffff;
   font-weight: 800;
-`
-export const ChangeButton = styled.button`
-  outline: none;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
 `

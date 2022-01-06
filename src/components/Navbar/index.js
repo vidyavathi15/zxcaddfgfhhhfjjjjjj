@@ -1,5 +1,6 @@
 import Popup from 'reactjs-popup'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import ThemeContext from '../../context/ThemeContext'
 import './index.css'
@@ -18,6 +19,7 @@ import {
   CancelButton,
   ConfirmButton,
   ThemeButton,
+  NavItemContainer,
 } from './styledComponents'
 
 const Navbar = () => (
@@ -38,9 +40,15 @@ const Navbar = () => (
         : 'https://assets.ccbp.in/frontend/react-js/dark-theme-img.png'
       const navbarBg = isDarkTheme ? '#181818' : '#ffffff'
 
-      const onClickLogout = props => {
+      const onClickConfirmButton = props => {
         const {history} = props
-        history.replace('/Login')
+
+        Cookies.remove('jwt_token')
+        history.replace('/login')
+      }
+
+      const overlayStyles = {
+        backgroundColor: '#ffff',
       }
 
       return (
@@ -52,7 +60,7 @@ const Navbar = () => (
 
             <NavItemsListContainer>
               <NavItem>
-                <ThemeButton onClick={onClickTheme}>
+                <ThemeButton onClick={onClickTheme} type="button">
                   <ThemeImage src={themeUrl} alt="theme" />
                 </ThemeButton>
               </NavItem>
@@ -62,27 +70,26 @@ const Navbar = () => (
                   alt="profile"
                 />
               </NavItem>
-              <NavItem>
+              <NavItemContainer>
                 <Popup
                   model
                   trigger={
-                    <LogoutButton data-testid="logoutButton">
+                    <LogoutButton data-testid="logoutButton" type="button">
                       Logout
                     </LogoutButton>
                   }
+                  overlayStyle={overlayStyles}
                   className="popup-content"
                 >
-                  <>
-                    <TextPopup>Are you sure, you want to logout?</TextPopup>
-                    <PopupButtonContainer>
-                      <CancelButton type="button">Cancel</CancelButton>
-                      <ConfirmButton type="button" onClick={onClickLogout}>
-                        Confirm
-                      </ConfirmButton>
-                    </PopupButtonContainer>
-                  </>
+                  <TextPopup>Are you sure, you want to logout?</TextPopup>
+                  <PopupButtonContainer>
+                    <CancelButton type="button">Cancel</CancelButton>
+                    <ConfirmButton type="button" onClick={onClickConfirmButton}>
+                      Confirm
+                    </ConfirmButton>
+                  </PopupButtonContainer>
                 </Popup>
-              </NavItem>
+              </NavItemContainer>
             </NavItemsListContainer>
           </NavbarContentContainer>
         </NavbarBgContainer>
@@ -91,4 +98,4 @@ const Navbar = () => (
   </ThemeContext.Consumer>
 )
 
-export default Navbar
+export default withRouter(Navbar)

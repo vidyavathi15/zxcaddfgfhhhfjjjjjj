@@ -26,6 +26,8 @@ export const SideAndVideosContainer = styled.div`
   display: flex;
   min-height: 100vh;
   width: 100%;
+  margin-top: 20px;
+  padding: 20px;
 `
 
 export const AllVideosContainer = styled.div`
@@ -61,9 +63,10 @@ export const SearchInputContainer = styled.div`
   margin-top: 20px;
   display: flex;
   border: 1px solid #000000;
-  background-color: transparent;
+
   width: 70%;
   justify-content: space-between;
+  align-items: center;
 `
 
 export const SearchInput = styled.input`
@@ -99,18 +102,24 @@ export const NoSearchedImage = styled.img`
   height: 40px;
   width: 130px;
   margin-top: 30px;
+  @media screen and (min-width: 768px) {
+    height: 300px;
+    width: 300px;
+  }
 `
 export const NoSearchResults = styled.h1`
   color: #ffffff;
   font-family: 'Roboto';
   font-size: 14px;
   font-weight: 800;
+  margin-bottom: 15px;
 `
 export const NoSearchResultStatus = styled.p`
   color: #ffffff;
   font-size: 10px;
   font-family: 'Roboto';
   font-weight: 800;
+  margin-bottom: 15px;
 `
 export const NoSearchRetryButton = styled.button`
   cursor: pointer;
@@ -127,6 +136,7 @@ export const NoSearchRetryButton = styled.button`
   padding-right: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-top: 20px;
 `
 export const FailureVideosContainer = styled.div`
   display: flex;
