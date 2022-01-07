@@ -31,7 +31,7 @@ export const LinkItem = styled(Link)`
   padding-left: 10px;
 
   font-weight: 800;
-  color: white;
+  color: ${props => props.color};
 
   @media screen and (min-width: 768px) {
     font-size: 10px;

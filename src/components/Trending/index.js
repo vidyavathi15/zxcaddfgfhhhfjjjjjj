@@ -3,6 +3,12 @@ import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import ThemeContext from '../../context/ThemeContext'
 import TrendingItem from '../TrendingItem'
+
+import TrendingItemHeader from '../TrendingItemHeader'
+
+import Navbar from '../Navbar'
+import Sidebar from '../Sidebar'
+
 import {
   TrendingBgContainer,
   LoaderContainer,
@@ -74,9 +80,10 @@ class Trending extends Component {
 
   renderTrendingSuccessView = () => {
     const {trendingVideos} = this.state
-    console.log(trendingVideos)
+
     return (
       <TrendingListContainer>
+        <TrendingItemHeader />
         {trendingVideos.map(each => (
           <TrendingItem key={each.id} trendingDetails={each} />
         ))}
@@ -142,9 +149,24 @@ class Trending extends Component {
 
   render() {
     return (
-      <TrendingBgContainer data-testid="trending">
-        {this.renderTrending()}
-      </TrendingBgContainer>
+      <ThemeContext.Consumer>
+        {value => {
+          const {isDarkTheme} = value
+          const trendingBgTheme = isDarkTheme ? '#000000' : ' #ffffff'
+          return (
+            <>
+              <Navbar />
+              <TrendingBgContainer
+                data-testid="trending"
+                bgColor={trendingBgTheme}
+              >
+                <Sidebar />
+                {this.renderTrending()}
+              </TrendingBgContainer>
+            </>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }

@@ -9,7 +9,6 @@ import Trending from './components/Trending'
 
 import Gaming from './components/Gaming'
 import VideoItemDetails from './components/VideoItemDetails'
-
 import SavedVideos from './components/SavedVideos'
 
 import NotFound from './components/NotFound'
@@ -18,12 +17,19 @@ import ThemeContext from './context/ThemeContext'
 import './App.css'
 
 class App extends Component {
-  state = {isDarkTheme: false, isLiked: false, savedVideosList: []}
+  state = {
+    isDarkTheme: false,
+    isLiked: false,
+    isDisLiked: false,
+    isSaved: false,
+    savedVideosList: [],
+  }
 
   addingAndDeletingToSavedVideos = id => {
-    const {isLiked, savedVideosList} = this.state
+    const {isSaved, savedVideosList} = this.state
+    this.setState(prevState => ({isSaved: !prevState.isSaved}))
 
-    if (isLiked === true) {
+    if (isSaved === true) {
       this.setState(prevState => ({
         savedVideosList: [...prevState.savedVideosList, id],
       }))
@@ -34,6 +40,10 @@ class App extends Component {
   }
 
   changingLikeToDisLike = () => {
+    const {isDisLiked} = this.state
+    if (isDisLiked === true) {
+      this.setState(prevState => ({isDisLiked: !prevState.isDisLiked}))
+    }
     this.setState(prevState => ({isLiked: !prevState.isLiked}))
   }
 
@@ -41,16 +51,33 @@ class App extends Component {
     this.setState(prevState => ({isDarkTheme: !prevState.isDarkTheme}))
   }
 
+  changingDisLike = () => {
+    const {isLiked} = this.state
+    if (isLiked === true) {
+      this.setState(prevState => ({isLiked: !prevState.isLiked}))
+    }
+    this.setState(prevState => ({isDisLiked: !prevState.isDisLiked}))
+  }
+
   render() {
-    const {isDarkTheme, isLiked, savedVideosList} = this.state
+    const {
+      isDarkTheme,
+      isDisLiked,
+      isLiked,
+      isSaved,
+      savedVideosList,
+    } = this.state
 
     return (
       <ThemeContext.Provider
         value={{
           isDarkTheme,
           isLiked,
+          isDisLiked,
           savedVideosList,
+          isSaved,
           addingAndDeletingToSavedVideos: this.addingAndDeletingToSavedVideos,
+          changingDisLike: this.changingDisLike,
 
           changingLikeToDisLike: this.changingLikeToDisLike,
           toggleTheme: this.toggleTheme,
@@ -61,12 +88,14 @@ class App extends Component {
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/trending" component={Trending} />
           <ProtectedRoute exact path="/gaming" component={Gaming} />
+          <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
+
           <ProtectedRoute
             exact
             path="/videos/:id"
             component={VideoItemDetails}
           />
-          <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
+
           <Route path="/not-found" component={NotFound} />
           <Redirect to="not-found" />
         </Switch>

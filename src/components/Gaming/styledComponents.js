@@ -2,8 +2,7 @@ import styled from 'styled-components/macro'
 
 export const GamingBgContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  background-color: ${props => props.gamingBgColors};
+  background-color: ${props => props.bgColor};
   min-height: 100vh;
 `
 export const LoaderContainer = styled.div`
@@ -51,4 +50,8 @@ export const GamingResultListContainer = styled.ul`
   margin: 0px;
   display: flex;
   flex-wrap: wrap;
+`
+export const GamingHeaderAndGameItemListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `

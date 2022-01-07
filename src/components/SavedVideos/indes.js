@@ -1,5 +1,8 @@
 import ThemeContext from '../../context/ThemeContext'
 import SavedVideoItem from '../SavedVideoItem'
+import Navbar from '../Navbar'
+import Sidebar from '../Sidebar'
+import SavedVideosItemHeader from '../SavedVideosItemHeader'
 
 import {
   SavedVideosBgContainer,
@@ -30,13 +33,18 @@ const SavedVideos = () => (
           </NoSavedVideosStatus>
         </NoSavedVideosContainer>
       ) : (
-        <SavedVideosBgContainer data-testid="savedVideos" bgColor={bgColor}>
-          <SavedListContainer>
-            {savedVideosList.map(each => (
-              <SavedVideoItem key={each.id} savedVideoDetails={each} />
-            ))}
-          </SavedListContainer>
-        </SavedVideosBgContainer>
+        <>
+          <Navbar />
+          <SavedVideosBgContainer data-testid="savedVideos" bgColor={bgColor}>
+            <Sidebar />
+            <SavedListContainer>
+              <SavedVideosItemHeader />
+              {savedVideosList.map(each => (
+                <SavedVideoItem key={each.id} savedVideoDetails={each} />
+              ))}
+            </SavedListContainer>
+          </SavedVideosBgContainer>
+        </>
       )
     }}
   </ThemeContext.Consumer>

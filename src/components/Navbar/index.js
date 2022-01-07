@@ -20,6 +20,7 @@ import {
   ConfirmButton,
   ThemeButton,
   NavItemContainer,
+  ModelContainer,
 } from './styledComponents'
 
 const Navbar = () => (
@@ -81,13 +82,22 @@ const Navbar = () => (
                   overlayStyle={overlayStyles}
                   className="popup-content"
                 >
-                  <TextPopup>Are you sure, you want to logout?</TextPopup>
-                  <PopupButtonContainer>
-                    <CancelButton type="button">Cancel</CancelButton>
-                    <ConfirmButton type="button" onClick={onClickConfirmButton}>
-                      Confirm
-                    </ConfirmButton>
-                  </PopupButtonContainer>
+                  {close => (
+                    <ModelContainer>
+                      <TextPopup>Are you sure, you want to logout?</TextPopup>
+                      <PopupButtonContainer>
+                        <CancelButton type="button" onClick={() => close()}>
+                          Cancel
+                        </CancelButton>
+                        <ConfirmButton
+                          type="button"
+                          onClick={onClickConfirmButton}
+                        >
+                          Confirm
+                        </ConfirmButton>
+                      </PopupButtonContainer>
+                    </ModelContainer>
+                  )}
                 </Popup>
               </NavItemContainer>
             </NavItemsListContainer>

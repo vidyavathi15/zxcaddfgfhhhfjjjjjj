@@ -4,6 +4,7 @@ export const NavbarBgContainer = styled.div`
   background-color: ${props => props.navbarBg};
   width: 100%;
   padding: 10px;
+  box-shadow: 0px 0px 0px 1px #dcdcdc;
 `
 export const NavbarContentContainer = styled.div`
   display: flex;
@@ -94,6 +95,7 @@ export const CancelButton = styled.button`
   padding-right: 10px;
   border: none;
   border-radius: 4px;
+  margin-right: 10px;
 `
 export const ConfirmButton = styled.button`
   background-color: #3b82f6;
@@ -115,4 +117,19 @@ export const NavItemContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 20%;
+`
+export const ModelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 50%;
+  flex-grow: 1;
+  max-width: 400px;
+  background-color: #94a3b8;
+  @media screen and (min-width: 768px) {
+    max-width: 460px;
+    max-height: 200px;
+  }
 `

@@ -12,12 +12,20 @@ import {
 } from './styledComponents'
 
 const SavedVideoItem = props => {
-  const {id, title, thumbnailUrl, viewCount, publishedAt, name} = props
+  const {savedVideoDetails} = props
+  const {
+    id,
+    title,
+    thumbnailUrl,
+    viewCount,
+    publishedAt,
+    name,
+  } = savedVideoDetails
 
   const postedDate = formatDistanceToNow(new Date(publishedAt))
 
   return (
-    <LinkItem to={`/video/${id}`}>
+    <LinkItem to={`/videos/${id}`}>
       <SavedVideosListItem>
         <SavedVideosThumbnailImage src={thumbnailUrl} alt={name} />
         <SavedInformationContainer>

@@ -1,9 +1,8 @@
 import styled from 'styled-components/macro'
 
 export const VideoItemDetailsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
+  background-color: ${props => props.color};
 `
 export const LoaderContainer = styled.div`
   display: flex;
@@ -170,4 +169,10 @@ export const VideoItemDetailsAppContainer = styled.div`
   min-height: 100vh;
   background-color: transparent;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+`
+export const VideoItemDetailsAppTopContainer = styled.div`
+  display: flex;
 `

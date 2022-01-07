@@ -2,15 +2,15 @@ import styled from 'styled-components/macro'
 
 export const TrendingBgContainer = styled.div`
   display: flex;
-  background-color:${props => props.TrendingBgColorTheme}}
+  background-color:${props => props.bgColor}}
   min-height: 100vh;
-  flex-direction: column;
+  
 `
 export const TrendingListContainer = styled.ul`
   display: flex;
+  flex-direction: column;
   padding-left: 0px;
   margin: 0px;
-  flex-direction: column;
 `
 export const FailureTrendingContainer = styled.div`
   display: flex;

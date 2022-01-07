@@ -3,6 +3,9 @@ import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import ThemeContext from '../../context/ThemeContext'
 import GameItem from '../GameItem'
+import Navbar from '../Navbar'
+import Sidebar from '../Sidebar'
+import GamingItemHeader from '../GamingItemHeader'
 
 import {
   GamingResultListContainer,
@@ -13,6 +16,7 @@ import {
   FailureVideosRetryButton,
   LoaderContainer,
   GamingBgContainer,
+  GamingHeaderAndGameItemListContainer,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -71,11 +75,14 @@ class Gaming extends Component {
     const {gameResults} = this.state
 
     return (
-      <GamingResultListContainer>
-        {gameResults.map(each => (
-          <GameItem key={each.id} gameItemDetails={each} />
-        ))}
-      </GamingResultListContainer>
+      <GamingHeaderAndGameItemListContainer>
+        <GamingItemHeader />
+        <GamingResultListContainer>
+          {gameResults.map(each => (
+            <GameItem key={each.id} gameItemDetails={each} />
+          ))}
+        </GamingResultListContainer>
+      </GamingHeaderAndGameItemListContainer>
     )
   }
 
@@ -134,9 +141,27 @@ class Gaming extends Component {
 
   render() {
     return (
-      <GamingBgContainer data-testid="gaming">
-        {this.renderGamingResults()}
-      </GamingBgContainer>
+      <ThemeContext.Consumer>
+        {value => {
+          const {isDarkTheme} = value
+
+          const gamingBgThemeColor = isDarkTheme ? '#000000' : ' #ffffff'
+          return (
+            <>
+              <Navbar />
+
+              <GamingBgContainer
+                data-testid="gaming"
+                bgColor={gamingBgThemeColor}
+              >
+                <Sidebar />
+
+                {this.renderGamingResults()}
+              </GamingBgContainer>
+            </>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }

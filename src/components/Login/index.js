@@ -124,8 +124,6 @@ class Login extends Component {
 
   render() {
     const {showSubmitError, errorMsg} = this.state
-    console.log(errorMsg)
-    console.log(showSubmitError)
 
     const jwtToken = Cookies.get('jwt_token')
 

@@ -7,6 +7,8 @@ import {AiOutlineLike} from 'react-icons/ai'
 import {formatDistanceToNow} from 'date-fns'
 import Loader from 'react-loader-spinner'
 import ThemeContext from '../../context/ThemeContext'
+import Navbar from '../Navbar'
+import Sidebar from '../Sidebar'
 
 import {
   VideoItemDetailsContainer,
@@ -36,6 +38,7 @@ import {
   VideoItemDetailsDescriptionDisplay,
   ListItem,
   VideoItemDetailsAppContainer,
+  VideoItemDetailsAppTopContainer,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -46,7 +49,7 @@ const apiStatusConstants = {
 }
 
 class VideoItemDetails extends Component {
-  state = {videoDetails: {}}
+  state = {videoDetails: {}, apiStatus: apiStatusConstants.initial}
 
   componentDidMount() {
     this.getVideoItemDetailsData()
@@ -107,8 +110,11 @@ class VideoItemDetails extends Component {
       {value => {
         const {
           isLiked,
+          isDisLiked,
           changingLikeToDisLike,
           addingAndDeletingToSavedVideos,
+          changingDisLike,
+          isSaved,
         } = value
 
         const {videoDetails} = this.state
@@ -128,16 +134,17 @@ class VideoItemDetails extends Component {
 
         const colorChangeTextOrIcon = isLiked ? '#2563eb' : '#64748b'
 
-        const disLikeColorText = isLiked ? '#2563eb' : '#64748b'
+        const disLikeColorText = isDisLiked ? '#2563eb' : '#64748b'
 
-        const saveToSavedText = isLiked ? 'Saved' : 'Save'
+        const saveToSavedText = isSaved ? 'Saved' : 'Save'
+        const saveColorText = isSaved ? '#2563eb' : '#64748b'
 
         const onClickIconOrText = () => {
           changingLikeToDisLike()
         }
 
         const onClickIconOrDisLikeText = () => {
-          changingLikeToDisLike()
+          changingDisLike()
         }
 
         const onClickIconOrSaveText = () => {
@@ -184,12 +191,12 @@ class VideoItemDetails extends Component {
 
                 <ListItem>
                   <BiListPlus
-                    color={colorChangeTextOrIcon}
+                    color={saveColorText}
                     onClick={onClickIconOrSaveText}
                   />
                   <SaveText
-                    onClick={onClickIconOrText}
-                    color={colorChangeTextOrIcon}
+                    onClick={onClickIconOrSaveText}
+                    color={saveColorText}
                   >
                     {saveToSavedText}
                   </SaveText>
@@ -278,9 +285,27 @@ class VideoItemDetails extends Component {
 
   render() {
     return (
-      <VideoItemDetailsContainer data-testid="videoItemDetails">
-        {this.renderVideoItemDetailsView()}
-      </VideoItemDetailsContainer>
+      <ThemeContext.Consumer>
+        {value => {
+          const {isDarkTheme} = value
+          const containerBgColor = isDarkTheme ? '#000000' : '#d7dfe9'
+
+          return (
+            <>
+              <Navbar />
+              <VideoItemDetailsContainer
+                data-testid="videoItemDetails"
+                color={containerBgColor}
+              >
+                <VideoItemDetailsAppTopContainer>
+                  <Sidebar />
+                  {this.renderVideoItemDetailsView()}
+                </VideoItemDetailsAppTopContainer>
+              </VideoItemDetailsContainer>
+            </>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }
