@@ -2,6 +2,9 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import {BsSearch} from 'react-icons/bs'
+
+import {AiOutlineClose} from 'react-icons/ai'
+
 import Navbar from '../Navbar'
 import VideoItem from '../VideoItem'
 import Sidebar from '../Sidebar'
@@ -31,6 +34,8 @@ import {
   NoSearchRetryButton,
   SearchInputContainer,
   SideAndVideosContainer,
+  CloseAndLogoContainer,
+  BannerButtonClose,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -45,6 +50,7 @@ class Home extends Component {
     apiStatus: apiStatusConstants.initial,
     searchInput: '',
     allVideos: [],
+    isClosedBanner: false,
   }
 
   componentDidMount() {
@@ -147,7 +153,7 @@ class Home extends Component {
               We are having Some trouble to complete your request, please try
               again.
             </FailureResultsStatus>
-            <FailureVideosRetryButton type="button">
+            <FailureVideosRetryButton type="button" onClick={this.onClickRetry}>
               Retry
             </FailureVideosRetryButton>
           </FailureVideosContainer>
@@ -187,44 +193,69 @@ class Home extends Component {
     }
   }
 
+  onClickCloseButton = () => {
+    this.setState({isClosedBanner: true})
+  }
+
   render() {
-    const {searchInput} = this.state
     return (
-      <>
-        <Navbar />
-        <AppContainer data-testid="home">
-          <SideAndVideosContainer>
-            <Sidebar />
-            <AllVideosContainer>
-              <BannerContainer>
-                <ImageLogo
-                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                  alt="website logo"
-                />
+      <ThemeContext.Consumer>
+        {value => {
+          const {isDarkTheme} = value
+          const homeBgColor = isDarkTheme ? '#181818' : ' #ffffff'
 
-                <BannerText>
-                  Buy Nxt Watch Premium prepaid plans with UPI
-                </BannerText>
-                <BannerButton type="button">GET IT NOW</BannerButton>
-              </BannerContainer>
-              <SearchInputContainer>
-                <SearchInput
-                  type="search"
-                  value={searchInput}
-                  onChange={this.onChangeSearchInput}
-                  placeholder="search"
-                  onKeyDown={this.enterSearchInput}
-                />
-                <SearchButton type="button" data-testid="searchButton">
-                  <BsSearch size="20px" />
-                </SearchButton>
-              </SearchInputContainer>
+          const {searchInput, isClosedBanner} = this.state
+          return (
+            <>
+              <Navbar />
+              <AppContainer data-testid="home" bgColor={homeBgColor}>
+                <SideAndVideosContainer>
+                  <Sidebar />
+                  <AllVideosContainer>
+                    {isClosedBanner ? null : (
+                      <BannerContainer data-testid="banner">
+                        <CloseAndLogoContainer>
+                          <ImageLogo
+                            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+                            alt="nxt watch logo"
+                          />
+                          <BannerButtonClose
+                            type="button"
+                            data-testid="close"
+                            onClick={this.onClickCloseButton}
+                          >
+                            <AiOutlineClose />
+                          </BannerButtonClose>
+                        </CloseAndLogoContainer>
 
-              {this.renderAllVideos()}
-            </AllVideosContainer>
-          </SideAndVideosContainer>
-        </AppContainer>
-      </>
+                        <BannerText>
+                          Buy Nxt Watch Premium prepaid plans with UPI
+                        </BannerText>
+                        <BannerButton type="button">GET IT NOW</BannerButton>
+                      </BannerContainer>
+                    )}
+
+                    <SearchInputContainer>
+                      <SearchInput
+                        type="search"
+                        value={searchInput}
+                        onChange={this.onChangeSearchInput}
+                        placeholder="search"
+                        onKeyDown={this.enterSearchInput}
+                      />
+                      <SearchButton type="button" data-testid="searchButton">
+                        <BsSearch size="20px" />
+                      </SearchButton>
+                    </SearchInputContainer>
+
+                    {this.renderAllVideos()}
+                  </AllVideosContainer>
+                </SideAndVideosContainer>
+              </AppContainer>
+            </>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }

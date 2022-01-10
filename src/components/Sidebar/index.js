@@ -32,9 +32,9 @@ class Sidebar extends Component {
         {value => {
           const {isDarkTheme} = value
 
-          const contactText = isDarkTheme ? '#ffffff' : '#000000'
+          const contactText = isDarkTheme ? '#ffffff' : '#0f0f0f'
 
-          const footerTxt = isDarkTheme ? '#ffffff' : '#000000'
+          const footerTxt = isDarkTheme ? '#ffffff' : '#0f0f0f'
 
           const {isItemClicked} = this.state
 

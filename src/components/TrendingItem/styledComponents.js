@@ -23,7 +23,7 @@ export const TrendingInformationContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const TrendingTitle = styled.h1`
+export const TrendingTitle = styled.p`
   color: #616e7c;
   font-size: 16px;
   font-family: 'Roboto';
@@ -39,7 +39,7 @@ export const TrendingViewCount = styled.p`
   font-size: 14px;
   font-family: 'Roboto';
 `
-export const PostedDateEl = styled.span`
+export const PostedDateEl = styled.p`
   color: #616e7c;
   font-size: 14px;
   font-family: 'Roboto';

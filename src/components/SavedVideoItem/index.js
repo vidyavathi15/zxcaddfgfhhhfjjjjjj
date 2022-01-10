@@ -27,7 +27,10 @@ const SavedVideoItem = props => {
   return (
     <LinkItem to={`/videos/${id}`}>
       <SavedVideosListItem>
-        <SavedVideosThumbnailImage src={thumbnailUrl} alt={name} />
+        <SavedVideosThumbnailImage
+          src={thumbnailUrl}
+          alt="video thumbnailUrl"
+        />
         <SavedInformationContainer>
           <SavedTitle>{title}</SavedTitle>
           <SavedName>{name}</SavedName>

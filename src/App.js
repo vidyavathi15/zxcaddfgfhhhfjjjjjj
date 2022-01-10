@@ -9,6 +9,7 @@ import Trending from './components/Trending'
 
 import Gaming from './components/Gaming'
 import VideoItemDetails from './components/VideoItemDetails'
+
 import SavedVideos from './components/SavedVideos'
 
 import NotFound from './components/NotFound'
@@ -25,18 +26,24 @@ class App extends Component {
     savedVideosList: [],
   }
 
-  addingAndDeletingToSavedVideos = id => {
+  updateSavedVideosList = newVideo => {
     const {isSaved, savedVideosList} = this.state
-    this.setState(prevState => ({isSaved: !prevState.isSaved}))
 
-    if (isSaved === true) {
+    if (isSaved === false) {
       this.setState(prevState => ({
-        savedVideosList: [...prevState.savedVideosList, id],
+        savedVideosList: [...prevState.savedVideosList, newVideo],
       }))
     } else {
-      const updatedList = savedVideosList.filter(each => each.id !== id)
+      const updatedList = savedVideosList.filter(
+        each => each.id !== newVideo.id,
+      )
       this.setState({savedVideosList: updatedList})
     }
+  }
+
+  addingAndDeletingToSavedVideos = newVideo => {
+    this.setState(prevState => ({isSaved: !prevState.isSaved}))
+    this.updateSavedVideosList(newVideo)
   }
 
   changingLikeToDisLike = () => {

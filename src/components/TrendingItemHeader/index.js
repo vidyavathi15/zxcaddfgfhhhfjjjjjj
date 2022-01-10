@@ -8,7 +8,7 @@ import {
 } from './styledComponents'
 
 const ItemHeader = () => (
-  <ThemeContext>
+  <ThemeContext.Consumer>
     {value => {
       const {isDarkTheme} = value
       const colorIcon = isDarkTheme ? '#ff0000' : '#ff0000'
@@ -23,7 +23,7 @@ const ItemHeader = () => (
         </ItemHeaderBgContainer>
       )
     }}
-  </ThemeContext>
+  </ThemeContext.Consumer>
 )
 
 export default ItemHeader

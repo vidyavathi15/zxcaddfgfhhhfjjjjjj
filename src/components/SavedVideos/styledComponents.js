@@ -3,7 +3,13 @@ import styled from 'styled-components/macro'
 export const SavedVideosBgContainer = styled.div`
   background-color: ${props => props.bgColor};
   min-height: 100vh;
+  display: flex;
 `
+export const SavedVideosHeaderAndList = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 export const SavedListContainer = styled.ul`
   display: flex;
   flex-direction: column;

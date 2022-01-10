@@ -135,12 +135,12 @@ class Login extends Component {
       <LoginFormContainer>
         <WebsiteLogoMobileImage
           src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-          alt="nxt watch logo"
+          alt="website logo"
         />
         <FormContainer onSubmit={this.submitForm}>
           <WebsiteLogoDesktopImage
             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-            alt="nxt watch logo"
+            alt="website logo"
           />
 
           <InputContainer>{this.renderUserName()}</InputContainer>

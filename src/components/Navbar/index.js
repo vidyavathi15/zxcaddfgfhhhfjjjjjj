@@ -9,7 +9,7 @@ import {
   NavbarBgContainer,
   NavbarContentContainer,
   WebsiteLogoImage,
-  NavItemsListContainer,
+  NavItemsContainer,
   NavItem,
   ThemeImage,
   ProfileImage,
@@ -39,11 +39,11 @@ const Navbar = () => (
       const themeUrl = isDarkTheme
         ? 'https://assets.ccbp.in/frontend/react-js/light-theme-img.png'
         : 'https://assets.ccbp.in/frontend/react-js/dark-theme-img.png'
+
       const navbarBg = isDarkTheme ? '#181818' : '#ffffff'
 
       const onClickConfirmButton = props => {
         const {history} = props
-
         Cookies.remove('jwt_token')
         history.replace('/login')
       }
@@ -59,9 +59,13 @@ const Navbar = () => (
               <WebsiteLogoImage src={websiteUrl} alt="website logo" />
             </Link>
 
-            <NavItemsListContainer>
+            <NavItemsContainer>
               <NavItem>
-                <ThemeButton onClick={onClickTheme} type="button">
+                <ThemeButton
+                  data-testid="theme"
+                  type="button"
+                  onClick={onClickTheme}
+                >
                   <ThemeImage src={themeUrl} alt="theme" />
                 </ThemeButton>
               </NavItem>
@@ -86,7 +90,11 @@ const Navbar = () => (
                     <ModelContainer>
                       <TextPopup>Are you sure, you want to logout?</TextPopup>
                       <PopupButtonContainer>
-                        <CancelButton type="button" onClick={() => close()}>
+                        <CancelButton
+                          data-testid="close"
+                          type="button"
+                          onClick={() => close()}
+                        >
                           Cancel
                         </CancelButton>
                         <ConfirmButton
@@ -100,7 +108,7 @@ const Navbar = () => (
                   )}
                 </Popup>
               </NavItemContainer>
-            </NavItemsListContainer>
+            </NavItemsContainer>
           </NavbarContentContainer>
         </NavbarBgContainer>
       )

@@ -17,7 +17,7 @@ export const BannerContainer = styled.div`
 `
 export const AppContainer = styled.div`
   min-height: 100vh;
-  background-color: #00306e;
+  background-color: ${props => props.bgColor};
   box-shadow: 0px 0px 0px 1px #dcdcdc;
   width: 100%;
 `
@@ -59,6 +59,14 @@ export const BannerButton = styled.button`
   padding-left: 10px;
   padding-right: 10px;
 `
+
+export const BannerButtonClose = styled.button`
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+`
+
 export const SearchInputContainer = styled.div`
   margin-top: 20px;
   display: flex;
@@ -148,7 +156,7 @@ export const VideoFailureImage = styled.img`
   height: 150px;
   width: 150px;
 `
-export const FailureResults = styled.p`
+export const FailureResults = styled.h1`
   color: #ffffff;
   font-size: 16px;
   font-family: 'Roboto';
@@ -182,4 +190,8 @@ export const SuccessViewListContainer = styled.ul`
   padding-left: 0px;
   margin: 0px;
   margin-top: 30px;
+`
+export const CloseAndLogoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `

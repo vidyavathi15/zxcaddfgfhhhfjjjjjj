@@ -19,7 +19,7 @@ export const WebsiteLogoImage = styled.img`
     width: 150px;
   }
 `
-export const NavItemsListContainer = styled.ul`
+export const NavItemsContainer = styled.ul`
   padding-left: 0px;
   margin: 0px;
   display: flex;
@@ -112,7 +112,6 @@ export const ConfirmButton = styled.button`
   border-radius: 4px;
 `
 export const NavItemContainer = styled.div`
-  background-color: black;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -42,10 +42,10 @@ export const SidebarBottomContainer = styled.div`
   flex-direction: column;
   padding: 10px;
 `
-export const FooterHeading = styled.h1`
+export const FooterHeading = styled.p`
   font-size: 14px;
   font-family: 'Roboto';
-  color: #ffffff;
+  color: ${props => props.color};
   font-weight: 800;
   margin-bottom: 20px;
 `
@@ -61,6 +61,6 @@ export const IconImage = styled.img`
 export const FooterText = styled.p`
   font-size: 12px;
   font-family: 'Roboto';
-  color: #ffffff;
+  color: ${props => props.color};
   font-weight: 800;
 `

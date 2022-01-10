@@ -18,7 +18,7 @@ export const ThumbnailImage = styled.img`
     width: 200px;
   }
 `
-export const GameItemTitle = styled.h1`
+export const GameItemTitle = styled.p`
   color: #616e7c;
   font-size: 14px;
   font-family: 'Roboto';
@@ -31,7 +31,7 @@ export const ViewCountEl = styled.p`
   font-weight: 800;
   margin-right: 10px;
 `
-export const ViewCountText = styled.span`
+export const ViewCountText = styled.p`
   color: #616e7c;
   font-size: 14px;
   font-family: 'Roboto';

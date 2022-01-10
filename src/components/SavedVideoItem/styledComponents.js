@@ -24,7 +24,7 @@ export const SavedInformationContainer = styled.div`
   flex-direction: column;
   padding: 10px;
 `
-export const SavedTitle = styled.h1`
+export const SavedTitle = styled.p`
   color: #64748b;
   font-size: 20px;
   font-family: 'Roboto';
@@ -42,7 +42,7 @@ export const SavedViewCount = styled.p`
   font-family: 'Roboto';
   font-weight: 800;
 `
-export const SavedVideoPostedDate = styled.span`
+export const SavedVideoPostedDate = styled.p`
   color: #64748b;
   font-size: 13px;
   font-family: 'Roboto';

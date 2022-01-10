@@ -21,9 +21,9 @@ import {
   VideoItemDetailsTitle,
   ViewsAndLikeContainerMiddleContainer,
   ViewsCountContainer,
-  LikeText,
-  DisLikeText,
-  SaveText,
+  LikeTextButton,
+  DisLikeTextButton,
+  SaveTextButton,
   ReactPlayerContainer,
   HrLine,
   VideoItemDetailsBottomContainer,
@@ -128,6 +128,7 @@ class VideoItemDetails extends Component {
           profileImageUrl,
           subScriberCount,
           name,
+          thumbnailUrl,
         } = videoDetails
 
         const postedDate = formatDistanceToNow(new Date(publishedAt))
@@ -148,7 +149,16 @@ class VideoItemDetails extends Component {
         }
 
         const onClickIconOrSaveText = () => {
-          addingAndDeletingToSavedVideos(id)
+          const newVideo = {
+            id,
+            thumbnailUrl,
+            publishedAt,
+            viewCount,
+            title,
+            name,
+          }
+
+          addingAndDeletingToSavedVideos(newVideo)
         }
 
         return (
@@ -168,12 +178,13 @@ class VideoItemDetails extends Component {
                     color={colorChangeTextOrIcon}
                     onClick={onClickIconOrText}
                   />
-                  <LikeText
+                  <LikeTextButton
+                    type="button"
                     color={colorChangeTextOrIcon}
                     onClick={onClickIconOrText}
                   >
                     Like
-                  </LikeText>
+                  </LikeTextButton>
                 </ListItem>
 
                 <ListItem>
@@ -181,12 +192,13 @@ class VideoItemDetails extends Component {
                     color={disLikeColorText}
                     onClick={onClickIconOrDisLikeText}
                   />
-                  <DisLikeText
+                  <DisLikeTextButton
+                    type="button"
                     color={disLikeColorText}
                     onClick={onClickIconOrDisLikeText}
                   >
                     DisLike
-                  </DisLikeText>
+                  </DisLikeTextButton>
                 </ListItem>
 
                 <ListItem>
@@ -194,12 +206,13 @@ class VideoItemDetails extends Component {
                     color={saveColorText}
                     onClick={onClickIconOrSaveText}
                   />
-                  <SaveText
+                  <SaveTextButton
+                    type="button"
                     onClick={onClickIconOrSaveText}
                     color={saveColorText}
                   >
                     {saveToSavedText}
-                  </SaveText>
+                  </SaveTextButton>
                 </ListItem>
               </LikesAndDisLikeContainer>
             </ViewsAndLikeContainerMiddleContainer>
@@ -208,7 +221,7 @@ class VideoItemDetails extends Component {
               <VideoItemDetailSubPartContainer>
                 <VideoItemDetailsProfileImage
                   src={profileImageUrl}
-                  alt={name}
+                  alt="profile"
                 />
                 <VideoItemDetailsDescriptionContainer>
                   <VideoItemDetailsName>{name}</VideoItemDetailsName>
@@ -276,7 +289,7 @@ class VideoItemDetails extends Component {
         return this.renderVideoItemDetailsSuccessView()
       case apiStatusConstants.failure:
         return this.renderFailureVideoItemDetails()
-      case apiStatusConstants.loading:
+      case apiStatusConstants.inProgress:
         return this.renderLoadingVideoItemDetailsView()
       default:
         return null
@@ -288,7 +301,7 @@ class VideoItemDetails extends Component {
       <ThemeContext.Consumer>
         {value => {
           const {isDarkTheme} = value
-          const containerBgColor = isDarkTheme ? '#000000' : '#d7dfe9'
+          const containerBgColor = isDarkTheme ? '#0f0f0f' : '#f9f9f9'
 
           return (
             <>

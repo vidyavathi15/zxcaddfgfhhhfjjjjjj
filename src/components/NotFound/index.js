@@ -19,9 +19,9 @@ const NotFound = () => (
       return (
         <NotFoundContainer>
           <NotFoundImage src={notFoundImageUrl} alt="not found" />
-          <NotFoundResult>No Search results found</NotFoundResult>
+          <NotFoundResult>Page Not Found</NotFoundResult>
           <NotFoundResultStatus>
-            Try different key words or remove search filter
+            we are sorry, the page you requested could not be found.
           </NotFoundResultStatus>
         </NotFoundContainer>
       )

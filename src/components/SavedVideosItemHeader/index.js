@@ -9,7 +9,7 @@ import {
 } from './styledComponents'
 
 const ItemHeader = () => (
-  <ThemeContext>
+  <ThemeContext.Consumer>
     {value => {
       const {isDarkTheme} = value
       const colorIcon = isDarkTheme ? '#ff0000' : '#ff0000'
@@ -19,12 +19,12 @@ const ItemHeader = () => (
         <ItemHeaderBgContainer>
           <ItemContainer>
             <BiListPlus color={colorIcon} />
-            <ItemName color={itemNameColor}>Gaming</ItemName>
+            <ItemName color={itemNameColor}>Saved Videos</ItemName>
           </ItemContainer>
         </ItemHeaderBgContainer>
       )
     }}
-  </ThemeContext>
+  </ThemeContext.Consumer>
 )
 
 export default ItemHeader

@@ -11,12 +11,14 @@ import {
   NoSavedVideosImage,
   NoSavedResult,
   NoSavedVideosStatus,
+  SavedVideosHeaderAndList,
 } from './styledComponents'
 
 const SavedVideos = () => (
   <ThemeContext.Consumer>
     {value => {
       const {savedVideosList, isDarkTheme} = value
+
       const bgColor = isDarkTheme ? '#0f0f0f' : '#f9f9f9'
 
       const showNoVideosView = savedVideosList.length === 0
@@ -29,7 +31,7 @@ const SavedVideos = () => (
           />
           <NoSavedResult>No saved videos found</NoSavedResult>
           <NoSavedVideosStatus>
-            You can see your videos while watching them
+            Save your videos by clicking a button
           </NoSavedVideosStatus>
         </NoSavedVideosContainer>
       ) : (
@@ -37,12 +39,14 @@ const SavedVideos = () => (
           <Navbar />
           <SavedVideosBgContainer data-testid="savedVideos" bgColor={bgColor}>
             <Sidebar />
-            <SavedListContainer>
+            <SavedVideosHeaderAndList>
               <SavedVideosItemHeader />
-              {savedVideosList.map(each => (
-                <SavedVideoItem key={each.id} savedVideoDetails={each} />
-              ))}
-            </SavedListContainer>
+              <SavedListContainer>
+                {savedVideosList.map(each => (
+                  <SavedVideoItem key={each.id} savedVideoDetails={each} />
+                ))}
+              </SavedListContainer>
+            </SavedVideosHeaderAndList>
           </SavedVideosBgContainer>
         </>
       )

@@ -152,7 +152,7 @@ class Trending extends Component {
       <ThemeContext.Consumer>
         {value => {
           const {isDarkTheme} = value
-          const trendingBgTheme = isDarkTheme ? '#000000' : ' #ffffff'
+          const trendingBgTheme = isDarkTheme ? '#0f0f0f' : ' #f9f9f9'
           return (
             <>
               <Navbar />

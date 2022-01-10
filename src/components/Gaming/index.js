@@ -145,7 +145,7 @@ class Gaming extends Component {
         {value => {
           const {isDarkTheme} = value
 
-          const gamingBgThemeColor = isDarkTheme ? '#000000' : ' #ffffff'
+          const gamingBgThemeColor = isDarkTheme ? '#0f0f0f' : '  #f9f9f9 '
           return (
             <>
               <Navbar />

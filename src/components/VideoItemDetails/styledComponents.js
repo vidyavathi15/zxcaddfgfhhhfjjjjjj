@@ -58,7 +58,7 @@ export const RetryButton = styled.button`
 export const ReactPlayerContainer = styled.div`
   border-radius: 6px;
 `
-export const VideoItemDetailsTitle = styled.h1`
+export const VideoItemDetailsTitle = styled.p`
   color: #7e858e;
   font-size: 22px;
   font-family: 'Roboto';
@@ -100,28 +100,40 @@ export const ListItem = styled.li`
   align-items: center;
   margin: 10px;
 `
-export const LikeText = styled.p`
+export const LikeTextButton = styled.button`
   color: ${props => props.color};
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
   margin-left: 10px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
 `
 
-export const DisLikeText = styled.p`
+export const DisLikeTextButton = styled.button`
   color: ${props => props.color};
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
   margin-left: 10px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
 `
 
-export const SaveText = styled.p`
+export const SaveTextButton = styled.button`
   color: ${props => props.color};
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 800;
   margin-left: 10px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
 `
 export const HrLine = styled.hr`
   width: 100%;

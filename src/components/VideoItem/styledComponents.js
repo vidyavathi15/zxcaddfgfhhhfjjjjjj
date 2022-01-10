@@ -58,7 +58,7 @@ export const InformationBottomContainer = styled.div`
     width: 100%;
   }
 `
-export const VideoTitle = styled.h1`
+export const VideoTitle = styled.p`
   color: #475569;
   font-size: 16px;
   font-weight: 800;
@@ -68,7 +68,7 @@ export const VideoTitle = styled.h1`
     width: 100%;
   }
 `
-export const VideoName = styled.h1`
+export const VideoName = styled.p`
   color: #475569;
   font-size: 12px;
   font-weight: 800;
@@ -81,7 +81,7 @@ export const VideoCount = styled.p`
   font-weight: 800;
   font-family: 'Roboto';
 `
-export const VideoPostedDate = styled.span`
+export const VideoPostedDate = styled.p`
   color: #475569;
   font-size: 12px;
   font-weight: 800;
